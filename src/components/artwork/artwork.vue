@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     imageUrl() {
-      return 'http://192.168.31.118:3000/' + this.artwork.imageUrl
+      return 'http://192.168.1.102:3000/' + this.artwork.imageUrl
     }
   },
   created() {},

@@ -35,7 +35,7 @@ export default {
       .then(res => {
         console.log(res.data.artwork)
         this.artworkDetail = res.data.artwork
-        this.video = '<video width="100%" height="240" controls poster="http://192.168.31.118:3000/' + res.data.artwork.imageUrl + '" ><source src="http://192.168.31.118:3000/api/play?fn=' + res.data.artwork.videoUrl + '" type="video/mp4">您的浏览器不支持 video 标签。</video>'
+        this.video = '<video width="100%" height="240" controls poster="http://192.168.1.102:3000/' + res.data.artwork.imageUrl + '" ><source src="http://192.168.1.102:3000/api/play?fn=' + res.data.artwork.videoUrl + '" type="video/mp4">您的浏览器不支持 video 标签。</video>'
       })
   }
 }

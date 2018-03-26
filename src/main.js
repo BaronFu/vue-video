@@ -8,7 +8,7 @@ import Cube from 'cube-ui'
 
 Vue.config.productionTip = false
 
-Vue.use(VueSocketio, 'http://192.168.31.118:3000')
+Vue.use(VueSocketio, 'http://192.168.1.102:3000')
 Vue.use(Cube)
 
 /* eslint-disable no-new */

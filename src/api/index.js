@@ -6,7 +6,7 @@ import store from '../store'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 // 创建一个axios实例
 const instance = axios.create({
-  baseURL: 'http://192.168.31.118:3000',
+  baseURL: 'http://192.168.1.102:3000',
   timeout: 3000
 })
 

@@ -48,6 +48,7 @@ export default {
     height: 120px
     .tab
       position: fixed
+      z-index: 4
       bottom: 0
       left: 0
       display: flex

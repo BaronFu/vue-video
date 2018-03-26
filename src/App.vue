@@ -6,16 +6,6 @@
     </div>
     <v-tabar></v-tabar>
     <v-sidebar></v-sidebar>
-    <modal
-      v-show="isModalVisible"
-      @close="closeModal"
-      class="modal"></modal>
-      <button
-    type="button"
-    class="btn"
-    @click="showModal">
-      Open Modal!
-    </button>
   </div>
 </template>
 
@@ -23,22 +13,18 @@
 import tabar from './components/tabar/tabar'
 import header from './components/header/header'
 import sidebar from './components/sidebar/sidebar'
-import modal from './components/popup/popup'
 
 import { mapActions } from 'vuex'
 
 export default {
   name: 'App',
   data() {
-    return {
-      isModalVisible: false
-    }
+    return {}
   },
   components: {
     'v-tabar': tabar,
     'v-header': header,
-    'v-sidebar': sidebar,
-    modal
+    'v-sidebar': sidebar
   },
   watch: {
     // 如果路由有变化，会再次执行该方法
@@ -49,12 +35,6 @@ export default {
     // 隐藏MenuSlide
     hideMenuSlide() {
       this.setNavState(false)
-    },
-    showModal() {
-      this.isModalVisible = true
-    },
-    closeModal() {
-      this.isModalVisible = false
     }
   },
   computed: {
@@ -116,9 +96,4 @@ a.active {
   .content
     padding-top: 100px
     background: #F5F5F5
-.modal
-  z-index: 9998
-  width: 100%
-  height: 100%
-  background-color: rgba(0, 0, 0, 0.7)
 </style>

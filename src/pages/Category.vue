@@ -6,10 +6,11 @@
     @click="showModal">
       Open Modal!
     </button>
-    <modal
+    <modal class="popup"
       v-show="isModalVisible"
       @close="closeModal"
-      ></modal>
+      >
+      </modal>
   </div>
 </template>
 <script>
@@ -39,4 +40,8 @@ export default {
   top: 100px
   bottom: 0px
   width: 100%
+  .popup
+    width: 100%
+    height: 100%
+    background-color: rgba(0, 0, 0, .4)
 </style>
