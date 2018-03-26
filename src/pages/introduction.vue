@@ -20,11 +20,13 @@
         <div class="name">23</div>
       </div>
     </div>
+    <popup ref="extendPopup" :content="message"></popup>
   </div>
 </template>
 <script>
 import '../assets/iconfont/iconfont.css'
 import api from '../api'
+import popup from '../components/popup/popup'
 export default {
   props: {
     artwork: {
@@ -35,8 +37,12 @@ export default {
     return {
       isCollection: false,
       collectionNum: 103,
-      collectionClass: 'icon-shoucang1'
+      collectionClass: 'icon-shoucang1',
+      message: ''
     }
+  },
+  components: {
+    popup
   },
   computed: {
     likeClass() {
@@ -46,6 +52,7 @@ export default {
   methods: {
     like() {
       if (!this.artwork.isLike) {
+        // 推荐
         api.like({
           userId: this.artwork.user_id,
           artId: this.artwork._id
@@ -55,7 +62,10 @@ export default {
           })
         this.artwork.isLike = true
         this.artwork.likeNum++
+        this.message = '成功推荐'
+        this.$refs.extendPopup.show()
       } else {
+        // 取消推荐
         api.cancelLike({
           userId: this.artwork.user_id,
           artId: this.artwork._id
@@ -65,6 +75,8 @@ export default {
           })
         this.artwork.isLike = false
         this.artwork.likeNum--
+        this.message = '取消推荐'
+        this.$refs.extendPopup.show()
       }
     },
     collection() {
@@ -91,7 +103,6 @@ export default {
     top: 295px
     bottom: 0px
     width: 100%
-
     .title
       height: 40px
       margin: 15px 15px
