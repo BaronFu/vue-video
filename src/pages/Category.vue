@@ -6,6 +6,7 @@
     @click="showModal">
       Open Modal!
     </button>
+    <cube-button @click="showAlert">Dialog - type</cube-button>
     <modal class="popup"
       v-show="isModalVisible"
       @close="closeModal"
@@ -14,7 +15,7 @@
   </div>
 </template>
 <script>
-import modal from '../components/popup/popup'
+import modal from '../components/dialog/dialog'
 export default {
   data () {
     return {
@@ -30,6 +31,14 @@ export default {
     },
     closeModal() {
       this.isModalVisible = false
+    },
+    showAlert() {
+      this.$createDialog({
+        type: 'alert',
+        title: '我是标题',
+        content: '我是内容',
+        icon: 'cubeic-alert'
+      }).show()
     }
   }
 }
