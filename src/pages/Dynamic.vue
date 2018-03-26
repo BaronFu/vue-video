@@ -128,73 +128,73 @@ export default {
 <style  lang="stylus" rel="stylesheet/stylus">
 .upload-wrapper
   position: absolute
-  top: 100px
+  top: 50px
   bottom: 0px
   width: 100%
   background: #e5e5e5
   overflow: hidden
   .upload-content
-    padding-bottom: 150px
+    padding-bottom: 75px
     .btn
       margin: 1em 1em
       height: 3em
       border-radius: .3em
       background-color: green
       color: #fff
-      font-size: 32px
+      font-size: 16px
       display: flex
       justify-content: center
       align-items: center
     .title
-      height: 180px
-      margin: 20px 20px
+      height: 90px
+      margin: 10px 10px
       span
         display: block
         float: left
-        width: 100px
-        height: 60px
-        line-height: 60px
-        font-size: 32px
+        width: 50px
+        height: 30px
+        line-height: 30px
+        font-size: 16px
         vertical-align: center
       .title-inp
         float: left
-        width: 500px
-        font-size: 32px
-        line-height: 32px
-        border: 5 solid #e5e5e5
-        border-radius: 5px
+        width: 250px
+        font-size: 16px
+        line-height: 16px
+        border: 2px solid #e5e5e5
+        border-radius: 2px
     .sort
-      height: 180px
-      margin: 20px 20px
+      height: 90px
+      margin: 10px 10px
       span
         display: block
         float: left
-        width: 100px
-        height: 60px
-        line-height: 60px
-        font-size: 32px
+        width: 50px
+        height: 30px
+        line-height: 30px
+        font-size: 16px
         vertical-align: center
       .sort-inp
         float: left
-        width: 500px
-        font-size: 32px
-        line-height: 32px
-        border: 5 solid #e5e5e5
-        border-radius: 5px
+        width: 250px
+        font-size: 16px
+        line-height: 16px
+        border: 2px solid #e5e5e5
+        border-radius: 2px
     .desc
-      height: 180px
-      margin: 20px 20px
+      height: 90px
+      margin: 10px 10px
       span
         display: block
         float: left
-        width: 100px
-        height: 60px
-        line-height: 60px
-        font-size: 32px
+        width: 50px
+        height: 30px
+        line-height: 30px
+        font-size: 16px
         vertical-align: center
       .desc-inp
         float: left
-        width: 500px
-        font-size: 32px
-        line-height: 32px
+        width: 250px
+        font-size: 16px
+        line-height: 16px
 </style>

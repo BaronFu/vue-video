@@ -72,20 +72,20 @@ export default {
     border: 1px solid #e5e5e5
     .uploadBox
       display: block
-      height: 200px
+      height: 100px
       text-align: center
       cursor: pointer
-      padding: 20px 20px
+      padding: 10px 10px
       .btn
         position: relative
         display: block
-        width: 200px
-        height: 80px
-        font-size: 32px
-        line-height: 40px
-        padding: 18px 30px
-        margin: 20px 0px
-        border-radius: 5px
+        width: 100px
+        height: 40px
+        font-size: 16px
+        line-height: 20px
+        padding: 9px 15px
+        margin: 10px 0px
+        border-radius: 3px
         color: #fff
         background-color: #409eff
         border: 1px solid #dcdfe6
@@ -95,8 +95,8 @@ export default {
         position: absolute
         left: 0px
         top: 0px
-        width: 200px
-        height: 80px
+        width: 100px
+        height: 40px
         border: 1px solid #000
         opacity: 0
 </style>

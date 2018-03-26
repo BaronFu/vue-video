@@ -27,25 +27,27 @@ export default {
     position: fixed
     top: 0
     z-index: 4
-    height: 100px
+    height: 50px
     width: 100%
     background: #76D49B
     display: flex
     flex-direction: row
+
     .header-icon
       flex: 1
       text-align: left
-      padding-left: 20px
+      padding-left: 10px
       >i
-        line-height: 100px
+        line-height: 50px
+
   .header-cont
     flex: 1;
     text-align: right
-    padding-right: 40px
+    padding-right: 20px
     >p
-      line-height: 100px
+      line-height: 50px
       color: #ffffff
-      font-size:34px
+      font-size:17px
     &.goBack
       text-align: left
 </style>

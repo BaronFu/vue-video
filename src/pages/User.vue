@@ -114,36 +114,36 @@ export default {
 .user
   position: absolute
   width: 100%
-  top: 100px
-  bottom: 120px
+  top: 50px
+  bottom: 60px
   overflow: hidden
   .islogin
     display: flex
     .i-avatar
-      margin: 40px 30px 0;
+      margin: 20px 15px 0;
     .user-d
-      margin-top: 70px
+      margin-top: 35px
       p
-        line-height: 50px
+        line-height: 25px
         text-align: left
         &.username
-          font-size: 40px
+          font-size: 20px
           color: #000
         &.desc
-          font-size: 32px
-          padding-left: 2px
+          font-size: 16px
+          padding-left: 1px
   .user-h
     box-sizing: border-box
-    height: 310px
+    height: 155px
     color: #323232
     background: #76D49B
     text-align: center
-    padding-top: 20px
+    padding-top: 10px
     .avatar
-      width: 160px
-      height: 160px
+      width: 80px
+      height: 80px
       border-radius: 50%
-      border: 2px solid rgba(255, 255, 255, 0.95)
+      border: 1px solid rgba(255, 255, 255, 0.95)
       box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.2)
       overflow: hidden
       img
@@ -153,61 +153,61 @@ export default {
     .u-button
       display: flex
       justify-content: center
-      margin-top: 20px
+      margin-top: 10px
       a
         display: block
         text-align: center
-        width: 160px
+        width: 80px
         color: #2AD2C9
         background: #fff
-        height: 72px
-        line-height: 72px
-        font-size: 28px
-        border-radius: 0 5px 5px 0
+        height: 36px
+        line-height: 36px
+        font-size: 14px
+        border-radius: 0 2px 2px 0
       .t-login
         background: #2AD2C9
         color: #fff
-        border-radius: 5px 0 0 5px
+        border-radius: 2px 0 0 5px
   .circle
     display: flex
     justify-content: space-between
-    height: 150px
-    line-height: 150px
+    height: 75px
+    line-height: 75px
     background: #fff;
-    margin-bottom: 20px
+    margin-bottom: 10px
     >div:first-child
       display: flex
     .circle-n
-      width: 100px
+      width: 50px
       text-align: center
-      font-size: 15px
+      font-size: 7px
     .circle-p
       li
         display: inline-block
-        width: 120px
-        height: 120px
-        margin-top: 15px
+        width: 60px
+        height: 60px
+        margin-top: 7px
         img
           width: 100%
     .circle-more
       img
-        width: 35px
-        height: 35px
-        margin-top: 60px
-        margin-right: 20px
+        width: 18px
+        height: 18px
+        margin-top: 30px
+        margin-right: 10px
   .user-h-list
     background: #fff
-    padding: 20px 0
-    margin-bottom: 20px
+    padding: 10px 0
+    margin-bottom: 10px
     ul
       display: flex
       li
         flex: 1
         text-align: center
-        height: 80px
-        line-height: 80px
+        height: 40px
+        line-height: 40px
         border-right: 1px solid #89F0EB
-        font-size: 28px
+        font-size: 14px
         &:last-child
           border-right: none
         a

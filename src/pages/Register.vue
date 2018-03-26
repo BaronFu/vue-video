@@ -167,80 +167,89 @@ export default {
 .register
   position: absolute
   width:100%
-  top: 100px
+  top: 50px
   bottom: 0px
   overflow: hidden
   background-color: #323542
+
   .title
     width: 100%
     height: auto
     overflow: hidden
-    font-size: 36px
+    font-size: 18px
     text-align: center
-    line-height: 200px
+    line-height: 100px
     color: #fff
+
   .coordinates-icon
-    width: 400px
-    height: 250px
-    margin: 50px auto
+    width: 200px
+    height: 125px
+    margin: 25px auto
     position: relative
+
   .register-form
-    width: 600px
+    width: 300px
     height: auto
     margin: 0 auto
+
     .common-div
       width:100%;
-      height: 80px
+      height: 40px
       overflow: hidden
-      border-radius: 4px
-      margin-bottom: 50px
+      border-radius: 2px
+      margin-bottom: 25px
       >.common-icon
         float:left
-        width: 40px
-        height: 40px
-        line-height: 40px
+        width: 20px
+        height: 20px
+        line-height: 20px
         overflow: hidden
-        margin: 20px
+        margin: 10px
         text-align: center
         img
           width:100%
           height:auto
       >input
         float:left;
-        line-height: 80px
+        line-height: 40px
         background-color: transparent
         border: none
         outline: none
-        font-size: 32px
+        font-size: 16px
         color: #fff
+
       .verifi-code
         display: inline-block
-        width: 200px
-        height: 80px
-        line-height: 80px
+        width: 100px
+        height: 40px
+        line-height: 40px
         background: #0bd38a
         color: #fff
         text-align: center
-        padding-left: 20px
+        padding-left: 10px
+
       .readonly
         background: #eee
         color: #555
+
     .user-name,.user-pasw,.user-code
       background-color: rgba(255,255,255,0.1)
+
     .register-btn
       background-color: #0bd38a
       color: #fff
-      font-size: 40px
+      font-size: 20px
       text-align: center
-      height: 100px
-      line-height: 100px
-      margin-bottom: 50px
-      border-radius: 4px
+      height: 50px
+      line-height: 50px
+      margin-bottom: 25px
+      border-radius: 2px
+
   .forgets
-    width: 600px
-    height: 60px
-    line-height: 60px
-    font-size: 32px
-    margin-bottom: 50px
+    width: 300px
+    height: 30px
+    line-height: 30px
+    font-size: 16px
+    margin-bottom: 25px
     float: right
 </style>

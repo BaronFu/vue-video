@@ -34,5 +34,5 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 .group
-  margin-bottom:20px
+  margin-bottom:10px
 </style>

@@ -31,26 +31,26 @@ export default {
   .artwork
     flex: 0 1 auto
     width: 45%
-    margin: 18px
-    height: 380px
+    margin: 9px
+    height: 190px
     background-color: rgb(255, 255, 255)
-    border-radius: 12px
+    border-radius: 6px
     font-size: 0
     .poster
       width: 100%
-      height: 200px
+      height: 100px
       img
         width:100%
         height:100%
-        border-top-left-radius: 12px
-        border-top-right-radius: 12px
+        border-top-left-radius: 6px
+        border-top-right-radius: 6px
         padding: 0
     .title
-      height: 80px
+      height: 40px
       text-align: left
-      padding: 20px 20px 0px 20px
-      font-size: 30px
-      line-height: 40px
+      padding: 10px 10px 0px 10px
+      font-size: 15px
+      line-height: 20px
       overflow: hidden
       display: box
       text-overflow: ellipsis
@@ -58,13 +58,13 @@ export default {
       -webkit-box-orient: vertical
       -webkit-line-clamp: 2
     .sort
-      height: 70px
-      padding: 10px 20px 0px 20px
+      height: 35px
+      padding: 5px 10px 0px 10px
       span
         display: block
-        height: 70px
-        font-size: 28px
-        line-height: 70px
+        height: 35px
+        font-size: 14px
+        line-height: 35px
         text-align: left
         color: #7e8c8d
 </style>

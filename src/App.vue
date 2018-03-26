@@ -75,7 +75,7 @@ export default {
 }
 .icon {
   font-family:"icon" !important;
-  font-size:36px;
+  font-size:18px;
   font-style:normal;
   color: #ffffff;
 }
@@ -94,6 +94,6 @@ a.active {
   color: #2c3e50
   height: 100%
   .content
-    padding-top: 100px
+    padding-top: 50px
     background: #F5F5F5
 </style>

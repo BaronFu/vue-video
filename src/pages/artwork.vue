@@ -44,7 +44,7 @@ export default {
   @import "../common/stylus/mixin.styl"
   .artwork-detail
     position: absolute
-    top: 100px
+    top: 50px
     bottom: 0px
     width: 100%
     .video-wrapper
@@ -52,16 +52,16 @@ export default {
     .tab
       display: flex
       width: 100%
-      height: 80px
-      line-height 80px
+      height: 40px
+      line-height 40px
       color: #000
-      box-shadow: 0px 3px 20px rgba(7, 17, 27, 0.1)
+      box-shadow: 0px 1px 10px rgba(7, 17, 27, 0.1)
       .tab-item
         flex: 1
         text-align: center
         & > a
           display: block
-          font-size: 28px
+          font-size: 14px
           color: rgb(77, 85, 93)
           &.active
             color: rgb(240, 20, 20)

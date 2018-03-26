@@ -43,41 +43,41 @@ export default {
   a
     display: flex
     justify-content: space-between
-    height: 95px
-    line-height: 95px
-    margin: 0 20px
+    height: 48px
+    line-height: 48px
+    margin: 0 10px
     border-bottom: 1px solid #f5f5f5
     .cell-l
       color: #555
       .cell-icon
-        width: 42px
-        height: 42px
+        width: 21px
+        height: 21px
         vertical-align: middle
       span
-        font-size: 28px
-        margin-left: px2rem(10px)
+        font-size: 14px
+        margin-left: 10px
     .cell-r
       .badg
         display: inline-block
         color: #fff
-        width: 35px
-        height: 35px
-        line-height: 38px
+        width: 18px
+        height: 18px
+        line-height: 19px
         text-align: center
         background: red
         border-radius: 50%
       .avatar
         position: absolute
-        top: 10px
-        right: 55px
-        width: 80px
-        height: 80px
+        top: 5px
+        right: 28px
+        width: 40px
+        height: 40px
         border-radius: 50%
         overflow: hidden
         img
           width: 100%
       .more
-        width: 35px
-        height: 35px
+        width: 18px
+        height: 18px
         vertical-align: middle
 </style>

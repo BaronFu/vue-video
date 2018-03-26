@@ -88,26 +88,30 @@ export default {
 <style lang="stylus" rel="stylesheet/stylus">
   .introduction
     position: absolute
-    top: 590px
+    top: 295px
     bottom: 0px
     width: 100%
+
     .title
-      height: 80px
-      margin: 30px 20px
-      line-height: 40px
-      font-size: 28px
+      height: 40px
+      margin: 15px 15px
+      line-height: 20px
+      font-size: 14px
       text-align: left
+
     .function
       width: 100%
-      height: 100px
+      height: 50px
       display: flex
+
       .block
         flex: 1
         width: 100%
-        height: 100px
-        line-height: 50px
+        height: 50px
+        line-height: 25px
+
         .iconfont
-          font-size: 50px
+          font-size: 25px
         .name
-          font-size: 24px
+          font-size: 12px
 </style>

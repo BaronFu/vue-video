@@ -83,40 +83,47 @@ export default {
   .sidebar-con
     position: fixed
     top: 0
-    width: 600px
+    width: 300px
     height: 100%
     z-index: 50
     background: #fff
     overflow: auto
+
     &.slide-enter-active, &.slide-leave-active
       transition all 0.5s
+
     &.slide-enter, &.slide-leave-active
       transform translate3d(-100%, 0, 0)
+
     .sidebar-head
-      padding: 35px 35px 0
+      padding: 17px 17px 0
       color: #fff
       background: #76D49B
+
       .user
         img
-          width: 100px
-          height: 100px
+          width: 50px
+          height: 50px
           border-radius: 50%
           vertical-align: middle
         span
-          padding-left: 15px
-          font-size: 22px
+          padding-left: 8px
+          font-size: 11px
+
       .function
         display: flex
-        margin-top: 20px
+        margin-top: 10px
+
         .function-sub
           flex: 1
-          padding-left: 30px
-          height: 100px
-          line-height: 100px
+          padding-left: 15px
+          height: 50px
+          line-height: 50px
           a
             display: block
             color: #fff
-            font-size: 32px
+            font-size: 16px
+
   .sidebar-mask
     position: fixed
     width: 100%
@@ -127,8 +134,10 @@ export default {
     bottom: 0
     z-index: 40
     background: rgba(0,0,0,.7)
+
     &.fade-enter-active, &.fade-leave-active
       transition: opacity .5s
+
     &.fade-enter, &.fade-leave-active
       opacity: 0
 </style>

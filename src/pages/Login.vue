@@ -76,7 +76,7 @@ export default {
 <style  lang="stylus" rel="stylesheet/stylus">
 .login
   position: absolute
-  top: 100px
+  top: 50px
   bottom: 0px
   width: 100%
   overflow: hidden
@@ -84,63 +84,69 @@ export default {
   .title
     width: 100%
     overflow: hidden
-    font-size: 18px
+    font-size: 9px
     text-align: center
-    height: 200px
+    height: 100px
     color: #fff
+
   .coordinates-icon
-    width: 400px
-    height: 250px
-    margin: 50px auto
+    width: 200px
+    height: 125px
+    margin: 25px auto
     position: relative
+
   .login-form
-    width: 600px
+    width: 300px
     height: auto
     margin: 0 auto
+
     .common-div
       width: 100%
-      height: 80px
+      height: 40px
       overflow: hidden
-      border-radius: 4px
-      margin-bottom: 50px
+      border-radius: 2px
+      margin-bottom: 25px
       >.common-icon
         float: left
-        width: 40px
-        height: 40px
-        line-height: 40px
+        width: 20px
+        height: 20px
+        line-height: 20px
         overflow: hidden
-        margin: 20px
+        margin: 10px
         text-align: center
         img
           width: 100%
           height: auto
       >input
         float: left
-        line-height: 80px
+        line-height: 40px
         background-color: transparent
         border: none
         outline: none
-        font-size: 32px
+        font-size: 16px
         color: #fff
+
     .user-name,.user-pasw
       background-color:rgba(255,255,255,0.1)
+
     .login-btn
       background-color: #0bd38a
       color: #fff
-      font-size: 40px
+      font-size: 20px
       text-align: center
-      height: 100px
-      line-height: 100px
-      margin-bottom: 50px
-      border-radius: 4px
+      height: 50px
+      line-height: 50px
+      margin-bottom: 25px
+      border-radius: 2px
+
   .forgets
-    width: 600px
+    width: 300px
     height: auto
     margin: 0 auto
     >a
       color: #fff
       opacity: 0.2
-      font-size: 32px
+      font-size: 16px
       float: left
       +a
         float: right

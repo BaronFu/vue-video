@@ -114,31 +114,31 @@ export default {
 <style  lang="stylus" rel="stylesheet/stylus">
   .artwork-wrapper
     position: absolute
-    top: 100px
+    top: 50px
     bottom: 0px
     width: 100%
     overflow: hidden
     background-color: rgb(243, 243, 243)
     .artwork-content
-      padding-top: 50px
-      padding-bottom: 120px
+      padding-top: 25px
+      padding-bottom: 60px
     .top-tip
       position: absolute
-      top: -40px
+      top: -20px
       left: 0
       z-index: 1
       width: 100%
-      height:40px
-      line-height:40px
+      height:20px
+      line-height:20px
       text-align:center
       color: #555
     .bottom-tip
       position: fixed
-      bottom: 120px
+      bottom: 60px
       left: 0px
       width: 100%
-      height: 40px
-      line-height: 35px
+      height: 20px
+      line-height: 17px
       text-align: center
       color: #777
       background: #f2f2f2
@@ -149,11 +149,11 @@ export default {
       left: 0
       z-index: 2
       width: 100%
-      height: 60px
-      line-height: 60px
+      height: 30px
+      line-height: 30px
       text-align: center
       color: #fff
-      font-size: 24px
+      font-size: 12px
       background: rgba(7, 17, 27, 0.7)
       &.alert-hook
         display: block
