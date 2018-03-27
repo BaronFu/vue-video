@@ -26,7 +26,7 @@ export default {
   .artwork-list
     display: flex
     flex-wrap: wrap
-    justify-content: space-between
+    justify-content: space-around
     align-items: flex-start
     width: 100%
     padding-bottom: 15px

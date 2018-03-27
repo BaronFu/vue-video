@@ -6,7 +6,12 @@
           <img :src="imageUrl" width="100%" height=""/>
         </div>
         <div class="title">{{artwork.name}}</div>
-        <div class="sort"><span>电影•科幻</span></div>
+        <div class="sort">
+          <span class="sort-name">电影•科幻</span>
+          <span class="sort-more iconfont icon-androidgengduo" @click.prevent="$refs.tip.show()">
+            <cube-tip ref="tip" direction="bottom" style="left: 0px; top: 0px">Tip</cube-tip>
+          </span>
+        </div>
       </div>
     </router-link>
   </div>
@@ -21,7 +26,9 @@ export default {
       return 'http://192.168.1.102:3000/' + this.artwork.imageUrl
     }
   },
-  created() {},
+  created() {
+    console.log(this.artwork)
+  },
   data () {
     return {}
   }
@@ -50,6 +57,7 @@ export default {
       text-align: left
       padding: 10px 10px 0px 10px
       font-size: 15px
+      color: #000
       line-height: 20px
       overflow: hidden
       display: box
@@ -61,10 +69,16 @@ export default {
       height: 35px
       padding: 5px 10px 0px 10px
       span
-        display: block
+        display: inline-block
         height: 35px
         font-size: 14px
         line-height: 35px
-        text-align: left
         color: #7e8c8d
+      .sort-name
+        width: 85%
+        text-align: left
+      .sort-more
+        width: 15%
+        font-size: 16px
+        text-align: right
 </style>
