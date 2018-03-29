@@ -1,8 +1,8 @@
 <template>
-    <div class="share-wrapper" v-show="shareshow">
+    <div class="share-wrapper">
       <transition name="fold">
-          <div class="share">
-            <div class="title">分享到</div>
+          <div class="share" v-show="shareshow">
+            <div class="shareTitle">分享到</div>
             <div class="shareMenus">
                 <mt-swipe :auto="0" :showIndicators="false" style="height: 180px;">
                     <mt-swipe-item>
@@ -23,7 +23,7 @@
                             <span class="name">QQ空间</span>
                         </div>
                         <div class="shareMenu">
-                            <i class="iconfont icon-iconfontweibomw"></i><br>
+                            <i class="iconfont icon-weibo"></i><br>
                             <span class="name">微博</span>
                         </div>
                          <div class="shareMenu">
@@ -80,6 +80,7 @@ export default {
 
 <style lang="stylus" rel="stylesheet/stylus">
 .share-wrapper
+  width: 100%
   .share
     position: fixed
     bottom: 0
@@ -93,8 +94,8 @@ export default {
     &.fold-enter-active, &.fold-leave-active
       transition: all 0.5s
     &.fold-enter, &.fold-leave-active
-      transform: translate3d(0, 100%, 0)
-    .title
+      transform translate3d(0, 100%, 0)
+    .shareTitle
       width: 100%
       height: 25px
       text-align: center
@@ -126,7 +127,7 @@ export default {
             background: #286bc4
           &.icon-qqkongjian
             background: #F4BD43
-          &.icon-iconfontweibomw
+          &.icon-weibo
             background: #DA4436
           &.icon-youdaoyunbiji
             background: #38A3EA

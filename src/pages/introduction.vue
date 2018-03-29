@@ -12,11 +12,11 @@
         <div class="name">{{collectionNum}}</div>
       </div>
       <div class="block">
-        <i class="iconfont icon-down"></i>
+        <i class="iconfont icon-huangcun"></i>
         <div>缓存</div>
       </div>
       <div class="block">
-        <i class="iconfont icon-iconfontfenxiang" @click="share"></i>
+        <i class="iconfont icon-fengxiang1" @click="share"></i>
         <div class="name">23</div>
       </div>
     </div>
