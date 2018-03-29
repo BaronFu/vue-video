@@ -16,17 +16,19 @@
         <div>缓存</div>
       </div>
       <div class="block">
-        <i class="iconfont icon-fenxiang"></i>
+        <i class="iconfont icon-iconfontfenxiang" @click="share"></i>
         <div class="name">23</div>
       </div>
     </div>
     <popup ref="extendPopup" :content="message"></popup>
+    <share ref="share"></share>
   </div>
 </template>
 <script>
 import '../assets/iconfont/iconfont.css'
 import api from '../api'
 import popup from '../components/popup/popup'
+import share from '../components/share/share'
 export default {
   props: {
     artwork: {
@@ -42,7 +44,8 @@ export default {
     }
   },
   components: {
-    popup
+    popup,
+    share
   },
   computed: {
     likeClass() {
@@ -93,6 +96,9 @@ export default {
       } else {
         this.collectionClass = 'icon-shoucang1'
       }
+    },
+    share() {
+      this.$refs.share.showShare()
     }
   }
 }

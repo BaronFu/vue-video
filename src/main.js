@@ -5,11 +5,14 @@ import store from './store'
 import 'lib-flexible/flexible'
 import VueSocketio from 'vue-socket.io'
 import Cube from 'cube-ui'
+import MintUI from 'mint-ui'
+import 'mint-ui/lib/style.css'
 
 Vue.config.productionTip = false
 
 Vue.use(VueSocketio, 'http://192.168.1.102:3000')
 Vue.use(Cube)
+Vue.use(MintUI)
 
 /* eslint-disable no-new */
 new Vue({
