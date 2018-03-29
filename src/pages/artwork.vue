@@ -5,10 +5,10 @@
     </div>
     <div class="tab">
       <div class="tab-item">
-        <router-link :to="{path: '/artwork/' + artworkDetail._id + '/introduction'}">简介</router-link>
+        <router-link :to="{path: '/artwork/' + artworkDetail._id}" replace exact>简介</router-link>
       </div>
       <div class="tab-item">
-        <router-link :to="{path: '/artwork/' + artworkDetail._id + '/ratings'}">评论</router-link>
+        <router-link :to="{path: '/artwork/' + artworkDetail._id + '/ratings'}" replace>评论</router-link>
       </div>
     </div>
     <router-view :artwork="artworkDetail"></router-view>
@@ -49,6 +49,7 @@ export default {
     width: 100%
     .video-wrapper
       width: 100%
+      height: 250px
     .tab
       display: flex
       width: 100%

@@ -2,25 +2,25 @@
     <div class="tabar" v-show="isShowTabbar">
         <div class="tab">
             <div class="tab-item">
-                <router-link to="/home">
+                <router-link to="/home" replace>
                     <div class="tab-icon"><img src="./tab_home.png" alt=""></div>
                     <div class="tab-text">首页</div>
                 </router-link>
             </div>
             <div class="tab-item">
-                <router-link to="/category">
+                <router-link to="/category" replace>
                     <div class="tab-icon"><img src="./tab_running.png" alt=""></div>
                     <div class="tab-text">分类</div>
                 </router-link>
             </div>
             <div class="tab-item">
-                <router-link to="/dynamic">
+                <router-link to="/dynamic" replace>
                     <div class="tab-icon"><img src="./tab_travel.png" alt=""></div>
                     <div class="tab-text">动态</div>
                 </router-link>
             </div>
             <div class="tab-item">
-                <router-link to="/user">
+                <router-link to="/user" replace>
                     <div class="tab-icon"><img src="./tab_user.png" alt=""></div>
                     <div class="tab-text">我的</div>
                 </router-link>
