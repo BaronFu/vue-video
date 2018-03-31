@@ -1,30 +1,31 @@
 <template>
-  <div class="artwork-wrapper" ref="wrapper">
-    <div class="artwork-content">
-      <div class="alert" :class="{'alert-hook':alert}">刷新成功</div>
-      <div class="top-tip">
-        <span class="refresh-hook" >{{topTip}}</span>
-      </div>
+  <div class="home">
+    <cube-scroll  ref="scroll" :data="items" :options="options" @pulling-down="onPullingDown" @pulling-up="onPullingUp">
       <artwork-list :artworkList="artworkList" class="artwork-list"></artwork-list>
-      <div class="bottom-tip">
-        <span class="loading-hook">{{bottomTip}}</span>
-      </div>
-    </div>
+    </cube-scroll>
   </div>
 </template>
 <script>
 import artworkList from '../components/artworkList/artworkList'
 import { mapGetters } from 'vuex'
-import BScroll from 'better-scroll'
-
 export default {
   data () {
     return {
-      data: [],
-      topTip: '下拉刷新',
-      bottomTip: '查看更多',
-      alert: false,
-      bottomTipShow: true
+      items: [],
+      options: {
+        pullDownRefresh: {
+          threshold: 90,
+          stop: 40,
+          txt: 'Refresh success'
+        },
+        pullUpLoad: {
+          threshold: 0,
+          txt: {
+            more: 'Load more',
+            noMore: 'No more data'
+          }
+        }
+      }
     }
   },
   components: {
@@ -34,127 +35,51 @@ export default {
     ...mapGetters([
       'artworkList',
       'currentPage',
-      'pageNum',
-      'dataStatus'
+      'pageNum'
     ])
   },
   created() {
-    if (this.currentPage <= this.pageNum) {
-      console.log(this.currentPage)
-      console.log(this.pageNum)
-      this.bottomTip = '查看更多'
-    } else {
-      this.bottomTip = '暂无更多数据'
-    }
+  },
+  mounted() {
     this._fetchData()
+    this.items = this.$store.state.artwork.artworkList
   },
   methods: {
     _fetchData() {
       this.$store.dispatch('getArtworks')
-      this.$nextTick(() => {
-        if (!this.scroll) {
-          this._initScroll()
-          // 滑动中
-          this.scroll.on('scroll', (pos) => {
-            if (pos.y > 30) {
-              this.topTip = '释放立即刷新'
-            }
-          })
-          // 滑动结束
-          this.scroll.on('touchEnd', (pos) => {
-            // 下拉动作
-            if (pos.y > 30) {
-              setTimeout(() => {
-                // 清除数据
-                this.$store.dispatch('resetData')
-                // 重新加载数据并计算滚动区域高度
-                this._fetchData()
-                this.bottomTip = '查看更多'
-                // 刷新成功后的提示
-                this._refreshAlert()
-                this.topTip = '下拉刷新'
-              }, 1000)
-            } else if (pos.y < (this.scroll.maxScrollY - 30)) {
-              this.bottomTip = '加载中...'
-              setTimeout(() => {
-                // 判断是否有更多数据
-                if (this.currentPage === this.pageNum) {
-                  // 恢复文本值
-                  this.bottomTip = '查看更多'
-                  // 向列表添加数据
-                  this._fetchData()
-                  // 加载更多后,重新计算滚动区域高度
-                } else {
-                  this.bottomTip = '暂无更多数据'
-                }
-              }, 1000)
-            }
-          })
-        } else {
-          this.scroll.refresh()
-        }
-      })
     },
-    _initScroll() {
-      this.scroll = new BScroll(this.$refs.wrapper, {
-        click: true,
-        probeType: 1
-      })
-    },
-    // 刷新成功提示方法
-    _refreshAlert() {
-      this.alert = true
+    onPullingDown() {
+      // 模拟更新数据
       setTimeout(() => {
-        this.alert = false
+        this.$store.dispatch('resetData')
+        this._fetchData()
+        this.items = this.$store.state.artwork.artworkList
+      }, 1000)
+    },
+    onPullingUp() {
+      // 更新数据
+      setTimeout(() => {
+        if (this.currentPage === this.pageNum) {
+          // 如果有新数据
+          this._fetchData()
+          this.items = this.$store.state.artwork.artworkList
+        } else {
+          // 如果没有新数据
+          this.$refs.scroll.forceUpdate()
+        }
       }, 1000)
     }
   }
 }
 </script>
 <style  lang="stylus" rel="stylesheet/stylus">
-  .artwork-wrapper
-    position: absolute
-    top: 50px
-    bottom: 0px
-    width: 100%
-    overflow: hidden
-    background-color: rgb(243, 243, 243)
-    .artwork-content
-      padding-top: 25px
-      padding-bottom: 60px
-    .top-tip
-      position: absolute
-      top: -20px
-      left: 0
-      z-index: 1
-      width: 100%
-      height:20px
-      line-height:20px
-      text-align:center
-      color: #555
-    .bottom-tip
-      position: fixed
-      bottom: 60px
-      left: 0px
-      width: 100%
-      height: 20px
-      line-height: 17px
-      text-align: center
-      color: #777
-      background: #f2f2f2
-    .alert
-      display: none
-      position: fixed
-      top: 0px
-      left: 0
-      z-index: 2
-      width: 100%
-      height: 30px
-      line-height: 30px
-      text-align: center
-      color: #fff
-      font-size: 12px
-      background: rgba(7, 17, 27, 0.7)
-      &.alert-hook
-        display: block
+.home
+  position: absolute
+  top: 50px
+  bottom: 60px
+  width: 100%
+  background-color: rgb(243, 243, 243)
+
+  .cube-scroll-wrapper
+    height: 100%
 </style>

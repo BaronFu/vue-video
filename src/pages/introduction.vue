@@ -128,7 +128,7 @@ export default {
         line-height: 25px
 
         .iconfont
-          font-size: 25px
+          font-size: 22px
         .name
           font-size: 12px
 </style>

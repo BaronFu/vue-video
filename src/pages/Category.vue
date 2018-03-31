@@ -1,51 +1,52 @@
 <template>
   <div class="category">
-    <button
-    type="button"
-    class="btn"
-    @click="showModal">
-      Open Modal!
-    </button>
-    <modal class="popup"
-    v-show="isModalVisible"
-    @close="closeModal"
-    >
-    </modal>
-    <cube-button @click="showAlert">Dialog - type</cube-button>
-    <cube-button @click="showBtn">Dialog - btn</cube-button>
-    <cube-popup type="extend-popup" :mask="false" ref="myPopup">
-      <div class="cube-extend-popup-content">
-        成功推荐
-      </div>
-    </cube-popup>
-    <cube-button @click="showPopup('myPopup')">
-      Show Popup
-    </cube-button>
-    <popup ref="extendPopup" :content="message"></popup>
-    <cube-button @click="$refs.extendPopup.show()">
-      Show Extend Popup
-    </cube-button>
-    <cube-button
-      :inline="true"
-      :outline="true"
-      :primary="true"
-      @click="$refs.tip.show()">Show tip</cube-button>
-    <cube-tip ref="tip" direction="top" style="position: relative;left:50px;top:50px;">Tip</cube-tip>
+    <cube-scroll  ref="scroll" :data="items" :options="options" @pulling-down="onPullingDown" @pulling-up="onPullingUp">
+      <artwork-list :artworkList="artworkList" class="artwork-list"></artwork-list>
+    </cube-scroll>
   </div>
 </template>
 <script>
-import modal from '../components/dialog/dialog'
-import popup from '../components/popup/popup'
+import bubble from '../components/bubble/bubble'
+import artworkList from '../components/artworkList/artworkList'
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
-      isModalVisible: false,
-      message: '成功推荐'
+      items: [1, 2, 3, 4, 5, 6, 7],
+      options: {
+        pullDownRefresh: {
+          threshold: 90,
+          stop: 40,
+          txt: 'Refresh success'
+        },
+        pullUpLoad: {
+          threshold: 0,
+          txt: {
+            more: 'Load more',
+            noMore: 'No more data'
+          }
+        }
+      },
+      bubbleY: 0,
+      pullDownInitTop: -50,
+      beforePullDown: true,
+      isPullingDown: false,
+      pullDownStyle: '',
+      refreshTxt: 'refresh success'
     }
   },
   components: {
-    modal,
-    popup
+    bubble,
+    artworkList
+  },
+  computed: {
+    ...mapGetters([
+      'artworkList',
+      'currentPage',
+      'pageNum'
+    ])
+  },
+  created() {
   },
   methods: {
     showModal() {
@@ -54,54 +55,45 @@ export default {
     closeModal() {
       this.isModalVisible = false
     },
-    showAlert() {
-      this.$createDialog({
-        type: 'alert',
-        title: '我是标题',
-        content: '我是内容',
-        icon: 'cubeic-alert'
-      }).show()
+    _reboundPullDown() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          this.scroll.finishPullDown()
+          this.isPullingDown = false
+          resolve()
+        }, 600)
+      })
     },
-    showBtn() {
-      this.$createDialog({
-        type: 'confirm',
-        icon: 'cubeic-alert',
-        title: '我是标题',
-        content: '我是内容',
-        confirmBtn: {
-          text: '确定按钮',
-          active: true,
-          disabled: false,
-          href: 'javascript:;'
-        },
-        cancelBtn: {
-          text: '取消按钮',
-          active: false,
-          disabled: false,
-          href: 'javascript:;'
-        },
-        onConfirm: () => {
-          this.$createToast({
-            type: 'warn',
-            time: 1000,
-            txt: '点击确认按钮'
-          }).show()
-        },
-        onCancel: () => {
-          this.$createToast({
-            type: 'warn',
-            time: 1000,
-            txt: '点击取消按钮'
-          }).show()
-        }
-      }).show()
-    },
-    showPopup(refId) {
-      const component = this.$refs[refId]
-      component.show()
+    _afterPullDown() {
       setTimeout(() => {
-        component.hide()
+        this.pullDownStyle = `top:${this.pullDownInitTop}px`
+        this.beforePullDown = true
+        this.scroll.refresh()
+      }, 100000)
+    },
+    onPullingDown() {
+      // 模拟更新数据
+      setTimeout(() => {
+        this.$store.dispatch('resetData')
+        this._fetchData()
+        this.items = this.$store.state.artwork.artworkList
       }, 1000)
+    },
+    onPullingUp() {
+      // 更新数据
+      setTimeout(() => {
+        if (this.currentPage === this.pageNum) {
+          // 如果有新数据
+          this._fetchData()
+          this.items = this.$store.state.artwork.artworkList
+        } else {
+          // 如果没有新数据
+          this.$refs.scroll.forceUpdate()
+        }
+      }, 1000)
+    },
+    _fetchData() {
+      this.$store.dispatch('getArtworks')
     }
   }
 }
@@ -110,16 +102,35 @@ export default {
 .category
   position: absolute
   top: 50px
-  bottom: 0px
+  bottom: 60px
   width: 100%
-  .popup
-    width: 100%
+  background-color: rgb(243, 243, 243)
+
+  .cube-scroll-wrapper
     height: 100%
-    background-color: rgba(0, 0, 0, .4)
-   .cube-extend-popup
-    .cube-extend-popup-content
-      padding: 10px 20px
-      border-radius: 5px
-      color: #fff
-      background-color: rgba(0, 0, 0, .8)
+
+  .mywrapper
+    position: relative
+    width: 100%
+    height: 200px
+    overflow: hidden
+
+    .pulldown-wrapper
+      position: absolute
+      width: 100%
+      left: 0
+      display: flex
+      justify-content: center
+      align-items: center
+      transition: all
+      .after-trigger
+        margin-top: 5px
+
+    .list-wrapper
+      position: relative
+      z-index: 1
+      li
+        width: 100%
+        height: 50px
+        line-height: 50px
 </style>

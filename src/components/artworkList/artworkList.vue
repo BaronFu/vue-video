@@ -29,5 +29,4 @@ export default {
     justify-content: space-around
     align-items: flex-start
     width: 100%
-    padding-bottom: 15px
 </style>
