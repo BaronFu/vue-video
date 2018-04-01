@@ -3,11 +3,11 @@
     <router-link :to="{path: '/artwork/' + artwork._id}">
       <div class="content-wrapper">
         <div class="poster">
-          <img :src="imageUrl" width="100%" height=""/>
+          <img v-lazy="imageUrl" width="100%" height=""/>
         </div>
         <div class="title">{{artwork.name}}</div>
         <div class="sort">
-          <span class="sort-name">电影•科幻</span>
+          <span class="sort-name" v-if="artwork.categoryID">{{artwork.categoryID.name}}</span>
           <span class="sort-more iconfont icon-androidgengduo" @click.prevent="$refs.tip.show()">
             <cube-tip ref="tip" direction="bottom" style="left: 0px; top: 0px">Tip</cube-tip>
           </span>

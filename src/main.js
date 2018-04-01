@@ -7,12 +7,18 @@ import VueSocketio from 'vue-socket.io'
 import Cube from 'cube-ui'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import VueLazyload from 'vue-lazyload'
 
 Vue.config.productionTip = false
 
 Vue.use(VueSocketio, 'http://192.168.1.102:3000')
 Vue.use(Cube)
 Vue.use(MintUI)
+
+// or with options
+Vue.use(VueLazyload, {
+  loading: require('./common/image/tv.png')
+})
 
 /* eslint-disable no-new */
 new Vue({

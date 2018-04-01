@@ -11,6 +11,7 @@
 </template>
 <script>
 import progressBar from '../progressBar/progressBar'
+import { Toast } from 'mint-ui'
 export default {
   data() {
     return {
@@ -39,6 +40,15 @@ export default {
       if (data.error === 0) {
         this.Percent = 100
         this.$store.commit('SET_VIDEO_PATHS', data.url)
+        // 消息提示
+        let instance = Toast({
+          message: '上传成功',
+          position: 'middle',
+          duration: 5000
+        })
+        setTimeout(() => {
+          instance.close()
+        }, 2000)
       }
     }
   },

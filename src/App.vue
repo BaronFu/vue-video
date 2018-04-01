@@ -94,6 +94,5 @@ a.active {
   color: #2c3e50
   height: 100%
   .content
-    padding-top: 50px
     background: #F5F5F5
 </style>

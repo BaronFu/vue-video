@@ -35,6 +35,7 @@ import uploadVideo from '../components/uploadVideo/uploadVideo'
 import { mapGetters } from 'vuex'
 import BScroll from 'better-scroll'
 import api from '../api'
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
@@ -98,6 +99,7 @@ export default {
       })
     },
     uploadContent () {
+      this._checkForm()
       let params = {
         title: this.titleInput.value,
         sort: this.sortInput.value,
@@ -108,12 +110,56 @@ export default {
       api.submitArtwork(params)
         .then(res => {
           if (res.data.code === 0) {
-            alert('success publish')
+            let instance = Toast({
+              message: 'success publish',
+              position: 'bottom',
+              duration: 5000
+            })
+            setTimeout(() => {
+              instance.close()
+            }, 2000)
           } else {
-            alert('failed publish')
+            let instance = Toast({
+              message: 'failed publish',
+              position: 'bottom',
+              duration: 5000
+            })
+            setTimeout(() => {
+              instance.close()
+            }, 2000)
           }
           console.log(res)
         })
+    },
+    _checkForm() {
+      if (!this.titleInput.value) {
+        let instance = Toast({
+          message: 'Title不能为空',
+          position: 'bottom',
+          duration: 5000
+        })
+        setTimeout(() => {
+          instance.close()
+        }, 2000)
+      } else if (!this.sortInput.value) {
+        let instance = Toast({
+          message: 'Sort不能为空',
+          position: 'bottom',
+          duration: 5000
+        })
+        setTimeout(() => {
+          instance.close()
+        }, 2000)
+      } else if (!this.descInput.value) {
+        let instance = Toast({
+          message: 'Desc不能为空',
+          position: 'bottom',
+          duration: 5000
+        })
+        setTimeout(() => {
+          instance.close()
+        }, 2000)
+      }
     }
   },
   watch: {
@@ -146,55 +192,53 @@ export default {
       justify-content: center
       align-items: center
     .title
-      height: 90px
+      width: 100%
+      height: 40px
       margin: 10px 10px
+      vertical-align: middle
+      text-align: left
       span
-        display: block
-        float: left
+        display: inline-block
         width: 50px
-        height: 30px
-        line-height: 30px
+        height: 40px
+        line-height: 40px
         font-size: 16px
-        vertical-align: center
       .title-inp
-        float: left
+        display: inline-block
         width: 250px
-        font-size: 16px
         line-height: 16px
-        border: 2px solid #e5e5e5
-        border-radius: 2px
+        font-size: 16px
     .sort
-      height: 90px
+      width: 100%
+      height: 40px
       margin: 10px 10px
+      vertical-align: middle
+      text-align: left
       span
-        display: block
-        float: left
+        display: inline-block
         width: 50px
-        height: 30px
-        line-height: 30px
+        height: 40px
+        line-height: 40px
         font-size: 16px
-        vertical-align: center
       .sort-inp
-        float: left
+        display: inline-block
         width: 250px
-        font-size: 16px
         line-height: 16px
-        border: 2px solid #e5e5e5
-        border-radius: 2px
+        font-size: 16px
     .desc
-      height: 90px
+      width: 100%
       margin: 10px 10px
+      text-align: left
+      vertical-align: middle
       span
-        display: block
-        float: left
+        display: inline-block
         width: 50px
-        height: 30px
-        line-height: 30px
+        height: 40px
+        line-height: 40px
         font-size: 16px
-        vertical-align: center
       .desc-inp
-        float: left
+        display: inline-block
         width: 250px
-        font-size: 16px
         line-height: 16px
+        font-size: 16px
 </style>
