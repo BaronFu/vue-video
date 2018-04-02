@@ -17,6 +17,7 @@ Vue.use(MintUI)
 
 // or with options
 Vue.use(VueLazyload, {
+  preLoad: 1.3,
   loading: require('./common/image/tv.png')
 })
 

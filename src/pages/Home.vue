@@ -79,7 +79,4 @@ export default {
   bottom: 60px
   width: 100%
   background-color: rgb(243, 243, 243)
-
-  .cube-scroll-wrapper
-    height: 100%
 </style>
