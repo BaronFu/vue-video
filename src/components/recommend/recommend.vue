@@ -1,6 +1,6 @@
 <template>
     <div class="recommend">
-        <router-link :to="{path: '/artwork/' + artwork._id}">
+        <router-link :to="{path: '/artwork/' + artwork._id}" replace>
             <div class="recommend-wrapper border-1px">
                 <div class="recommend-left">
                     <img :src="imageUrl" width="100%">
@@ -48,10 +48,9 @@ export default {
     .recommend-left
       flex: 0 0 35%
       padding-left: 10px
-      display: table-cell
-      vertical-align: middle
-      text-align: center
+      padding: 0px 0px 10px 10px
       img
+        height:100%
         border-radius: 5px
     .recommend-right
       flex: 1

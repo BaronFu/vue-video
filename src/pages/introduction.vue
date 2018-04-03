@@ -1,30 +1,32 @@
 <template>
   <div class="introduction">
-    <cube-scroll>
-      <div class="introduction-wrapper">
-        <userHeader :user="artwork.user"></userHeader>
-        <div class="fold-wrapper" @click="fold">
-          <div class="title" :class="{ isflod: isFlod }">{{artwork.name}}</div>
-          <span class="icon-fold iconfont icon-jiantou_down" v-if="isFlod"></span>
-          <span class="icon-fold iconfont icon-jiantou_up" v-else></span>
-          <div class="record">
-            <div class="record-item">
-              <span class="iconfont icon-bofangshu"></span>
-              <span class="num">{{artwork.pv}}</span>
+    <cube-scroll :options="options">
+      <keep-alive>
+        <div class="introduction-wrapper">
+          <userHeader :user="artwork.user"></userHeader>
+          <div class="fold-wrapper" @click="fold">
+            <div class="title" :class="{ isflod: isFlod }">{{artwork.name}}</div>
+            <span class="icon-fold iconfont icon-jiantou_down" v-if="isFlod"></span>
+            <span class="icon-fold iconfont icon-jiantou_up" v-else></span>
+            <div class="record">
+              <div class="record-item">
+                <span class="iconfont icon-bofangshu"></span>
+                <span class="num">{{artwork.pv}}</span>
+              </div>
+              <div class="record-item">
+                <span class="iconfont icon-yuanfucengpinglun"></span>
+                <span class="num">50</span>
+              </div>
+              <div class="record-item">
+                <span class="num">
+                  {{artwork.created_at | formatDate}}
+                </span>
+              </div>
             </div>
-            <div class="record-item">
-              <span class="iconfont icon-yuanfucengpinglun"></span>
-              <span class="num">50</span>
-            </div>
-            <div class="record-item">
-              <span class="num">
-                {{artwork.created_at | formatDate}}
-              </span>
-            </div>
+            <div class="desc" :class="{ isflod: isFlod }">{{artwork.description}}</div>
           </div>
-          <div class="desc" :class="{ isflod: isFlod }">{{artwork.description}}</div>
         </div>
-      </div>
+      </keep-alive>
       <div class="function border-1px">
         <div class="block">
           <i class="iconfont" :class="likeClass" @click="like"></i>
@@ -70,7 +72,12 @@ export default {
       collectionClass: 'icon-shoucang1',
       message: '',
       isFlod: true,
-      recommend: []
+      recommend: [],
+      options: {
+        scrollbar: {
+          fade: true
+        }
+      }
     }
   },
   created() {
@@ -161,6 +168,11 @@ export default {
     formatDate(time) {
       let date = new Date(time)
       return formatDate(date, 'yyyy-MM-dd')
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      this._recomList()
     }
   }
 }

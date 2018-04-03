@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <cube-scroll  ref="scroll" :data="items" :options="options" @pulling-down="onPullingDown" @pulling-up="onPullingUp">
+    <cube-scroll  ref="scroll" :data="$store.state.artwork.artworkList" :options="options" @pulling-down="onPullingDown" @pulling-up="onPullingUp">
       <artwork-list :artworkList="artworkList" class="artwork-list"></artwork-list>
     </cube-scroll>
   </div>
@@ -8,15 +8,20 @@
 <script>
 import artworkList from '../components/artworkList/artworkList'
 import { mapGetters } from 'vuex'
+import api from '../api'
+import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
-      items: [],
       options: {
+        // 滚动条设置为隐藏,不用滚动条就去掉scrollbar
+        scrollbar: {
+          fade: true
+        },
         pullDownRefresh: {
           threshold: 90,
           stop: 40,
-          txt: 'Refresh success'
+          txt: '刷新成功'
         },
         pullUpLoad: {
           threshold: 0,
@@ -33,40 +38,83 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'artworkList',
-      'currentPage',
-      'pageNum'
+      'artworkList'
     ])
   },
   created() {
   },
   mounted() {
     this._fetchData()
-    this.items = this.$store.state.artwork.artworkList
   },
   methods: {
     _fetchData() {
-      this.$store.dispatch('getArtworks')
+      this.$store.dispatch('getArtworks', {
+        limit: 6,
+        operating: 'Loading',
+        lastTime: this.$store.state.artwork.lastTime,
+        nextTime: this.$store.state.artwork.nextTime
+      })
     },
     onPullingDown() {
-      // 模拟更新数据
       setTimeout(() => {
-        this.$store.dispatch('resetData')
-        this._fetchData()
-        this.items = this.$store.state.artwork.artworkList
+        api.getArtworks({
+          params: {
+            limit: 6,
+            operating: 'Refresh',
+            lastTime: this.$store.state.artwork.lastTime,
+            nextTime: this.$store.state.artwork.nextTime
+          }
+        })
+          .then(res => {
+            if (res.data.data.artworks.length !== 0) {
+              // 如果有新数据
+              this.$store.commit('UNSHIFT_ARTWORKS_DATA', res.data.data.artworks)
+              this.$store.commit('SET_LAST_TIME')
+              this.$store.commit('SET_NEXT_TIME')
+            } else {
+              // 如果没有新数据
+              this.$refs.scroll.forceUpdate()
+              let instance = Toast({
+                message: '已是最新',
+                position: 'middle',
+                duration: 5000
+              })
+              setTimeout(() => {
+                instance.close()
+              }, 2000)
+            }
+          })
       }, 1000)
     },
     onPullingUp() {
-      // 更新数据
       setTimeout(() => {
-        if (this.currentPage === this.pageNum) {
-          // 如果有新数据
-          this._fetchData()
-          this.items = this.$store.state.artwork.artworkList
-        } else {
-          // 如果没有新数据
-          this.$refs.scroll.forceUpdate()
-        }
+        api.getArtworks({
+          params: {
+            limit: 6,
+            operating: 'Loading',
+            lastTime: this.$store.state.artwork.lastTime,
+            nextTime: this.$store.state.artwork.nextTime
+          }
+        })
+          .then(res => {
+            if (res.data.data.artworks.length !== 0) {
+              // 如果有新数据
+              this.$store.commit('CONCAT_ARTWORKS_DATA', res.data.data.artworks)
+              this.$store.commit('SET_LAST_TIME')
+              this.$store.commit('SET_NEXT_TIME')
+            } else {
+              // 如果没有新数据
+              this.$refs.scroll.forceUpdate()
+              let instance = Toast({
+                message: '暂无更多数据',
+                position: 'middle',
+                duration: 5000
+              })
+              setTimeout(() => {
+                instance.close()
+              }, 2000)
+            }
+          })
       }, 1000)
     }
   }

@@ -3,40 +3,30 @@ import api from '../../api'
 
 const state = {
   artworkList: JSON.parse(localStorage.getItem('artworkList')) || [],
-  pageNum: JSON.parse(localStorage.getItem('pageNum')) || 1,
-  currentPage: JSON.parse(localStorage.getItem('currentPage')) || 1,
-  dataStatus: JSON.parse(localStorage.getItem('dataStatus')) || '',
-  artworkDetail: {}
+  lastTime: JSON.parse(localStorage.getItem('lastTime')) || new Date(),
+  nextTime: JSON.parse(localStorage.getItem('nextTime')) || new Date()
 }
 
 const actions = {
   // get Artworks List
-  getArtworks({ commit }) {
-    console.log('currentPage:' + state.currentPage)
-    if (state.currentPage <= state.pageNum) {
-      api.getArtworks({
-        params: {
-          page: state.currentPage,
-          limit: 6
+  getArtworks({ commit }, payload) {
+    api.getArtworks({
+      params: payload
+    })
+      .then(res => {
+        console.log(res)
+        if (res.data.code === 2000) {
+          commit(types.CONCAT_ARTWORKS_DATA, res.data.data.artworks)
+          commit(types.SET_LAST_TIME)
+          commit(types.SET_NEXT_TIME)
+        } else if (res.data.code === 1000) {
+          alert(res.data.message)
+        } else if (res.data.code === 1001) {
+          alert(res.data.message)
+        } else if (res.data.code === 1002) {
+          alert(res.data.message)
         }
       })
-        .then(res => {
-          console.log(res)
-          if (res.data.code === 2000) {
-            commit(types.SET_ARTWORK_LIST, res.data.data)
-            commit(types.SET_CURRENT_PAGE)
-            commit(types.SET_PAGE_NUM, res.data.data)
-          } else if (res.data.code === 1000) {
-            alert(res.data.message)
-          } else if (res.data.code === 1001) {
-            alert(res.data.message)
-          } else if (res.data.code === 1002) {
-            alert(res.data.message)
-          }
-        })
-    } else {
-      commit(types.SET_DATA_STATUS, '没有更多数据')
-    }
   },
   // get Artworks Detail
   getArtworkDetail({ commit }, payload) {
@@ -57,10 +47,6 @@ const actions = {
 
 const getters = {
   artworkList: state => state.artworkList,
-  pageNum: state => state.pageNum,
-  currentPage: state => state.currentPage,
-  dataStatus: state => state.dataStatus,
-  artworkDetail: state => state.artworkDetail,
   imageUrl: (state) => {
     return 'http://p0h3qpfji.bkt.clouddn.com/' + state.artworkDetail.imageUrl
   },
@@ -78,28 +64,29 @@ const mutations = {
     }
     localStorage.setItem('artworkList', JSON.stringify(state.artworkList))
   },
-  [types.SET_CURRENT_PAGE](state) {
-    state.currentPage = state.currentPage + 1
-    localStorage.setItem('currentPage', JSON.stringify(state.currentPage))
-  },
-  [types.SET_PAGE_NUM](state, res) {
-    state.pageNum = res.totalPage
-    localStorage.setItem('pageNum', JSON.stringify(state.pageNum))
-  },
-  [types.SET_DATA_STATUS](state, res) {
-    state.dataStatus = res
-    localStorage.setItem('dataStatus', JSON.stringify(state.dataStatus))
-  },
-  [types.SET_ARTWORK_DETAIL](state, res) {
-    state.artworkDetail = res.artwork
-  },
   [types.RESET_ARTWORKS_DATA](state) {
     state.artworkList = []
-    state.currentPage = 1
-    state.pageNum = 1
     localStorage.setItem('artworkList', JSON.stringify(state.artworkList))
-    localStorage.setItem('currentPage', JSON.stringify(state.currentPage))
-    localStorage.setItem('pageNum', JSON.stringify(state.pageNum))
+  },
+  [types.UNSHIFT_ARTWORKS_DATA](state, payload) {
+    for (var i = 0; i < payload.length; i++) {
+      state.artworkList.unshift(payload[i])
+    }
+    localStorage.setItem('artworkList', JSON.stringify(state.artworkList))
+  },
+  [types.CONCAT_ARTWORKS_DATA](state, payload) {
+    for (var i = 0; i < payload.length; i++) {
+      state.artworkList.push(payload[i])
+    }
+    localStorage.setItem('artworkList', JSON.stringify(state.artworkList))
+  },
+  [types.SET_LAST_TIME](state) {
+    state.lastTime = state.artworkList[0].created_at
+    localStorage.setItem('lastTime', JSON.stringify(state.lastTime))
+  },
+  [types.SET_NEXT_TIME](state) {
+    state.nextTime = state.artworkList[state.artworkList.length - 1].created_at
+    localStorage.setItem('nextTime', JSON.stringify(state.nextTime))
   }
 }
 
