@@ -39,7 +39,7 @@ import { Toast } from 'mint-ui'
 export default {
   data () {
     return {
-      url: 'http://192.168.1.102:3000/api/upload',
+      url: 'http://127.0.0.1:3000/api/upload',
       imgs: [],
       titleInput: {
         type: 'text',

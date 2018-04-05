@@ -11,7 +11,7 @@ import VueLazyload from 'vue-lazyload'
 
 Vue.config.productionTip = false
 
-Vue.use(VueSocketio, 'http://192.168.1.102:3000')
+Vue.use(VueSocketio, 'http://127.0.0.1:3000')
 Vue.use(Cube)
 Vue.use(MintUI)
 

@@ -102,7 +102,6 @@ export default {
       if (!this.artwork.isLike) {
         // 推荐
         api.like({
-          userId: this.artwork.user._id,
           artId: this.artwork._id
         })
           .then((res) => {
@@ -114,10 +113,20 @@ export default {
             }
             console.log(res)
           })
+          .catch((error) => {
+            if (error.response.status === 401) {
+              if (error.response.data.code === 10002) {
+                this.message = '亲您还没登录'
+                this.$refs.extendPopup.show()
+              } else if (error.response.data.code === 10003) {
+                this.message = '亲您的登录已过期'
+                this.$refs.extendPopup.show()
+              }
+            }
+          })
       } else {
         // 取消推荐
         api.cancelLike({
-          userId: this.artwork.user._id,
           artId: this.artwork._id
         })
           .then((res) => {
@@ -128,6 +137,17 @@ export default {
               this.$refs.extendPopup.show()
             }
             console.log(res)
+          })
+          .catch((error) => {
+            if (error.response.status === 401) {
+              if (error.response.data.code === 10002) {
+                this.message = '亲您还没登录'
+                this.$refs.extendPopup.show()
+              } else if (error.response.data.code === 10003) {
+                this.message = '亲您的登录已过期'
+                this.$refs.extendPopup.show()
+              }
+            }
           })
       }
     },
