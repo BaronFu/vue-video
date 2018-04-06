@@ -1,48 +1,56 @@
 <template>
       <div class="sidebar">
         <transition name="slide">
-          <div class="sidebar-con" v-show="sidebarShow">
-            <div>
-              <div class="sidebar-head" v-if="loginStatus">
-                <div class="user">
-                  <img :src="userInfo.avatar" alt="">
-                  <span>{{userInfo.username}}</span>
-                </div>
-                <div class="function">
-                  <div class="function-sub">
-                    <router-link to="">
-                    <i class="icon">&#xe626;</i>
-                    <span>我的参加</span>
-                    </router-link>
+          <div class="sidebar-wrapper" v-show="sidebarShow">
+              <div class="sidebar-content">
+                <cube-scroll>
+                  <div>
+                    <div class="sidebar-head" v-if="loginStatus">
+                      <div class="sidebar-user">
+                        <div class="sidebar-avatar">
+                          <img :src="userInfo.avatar" alt="">
+                        </div>
+                        <div class="sidebar-function">
+                          <span><i class="iconfont icon-qianbao"></i></span>
+                          <span><i class="iconfont icon-erweima"></i></span>
+                        </div>
+                      </div>
+                      <div class="sidebar-userInfo">
+                          <span>{{userInfo.username}}</span>
+                          <span class="grade">LV3</span>
+                          <a href="javascript:;" @click="logout">
+                            <span>退出登录</span>
+                          </a>
+                      </div>
+                    </div>
+                    <div class="sidebar-head" v-else>
+                      <div class="sidebar-user">
+                        <div class="sidebar-avatar">
+                          <router-link to="user/login" @click="hideBar">
+                            <img src="http://p4w715494.bkt.clouddn.com/default.jpg" alt="">
+                          </router-link>
+                        </div>
+                      </div>
+                      <div class="sidebar-userInfo">
+                        <router-link to="user/login" @click="hideBar">
+                          <span>点击头像登录</span>
+                        </router-link>
+                      </div>
+                    </div>
+                    <div class="sidebar-list">
+                      <div class="sidebar-item" v-for="item in themes" :key="item.id" :class="{'current':currentThemeId===item.id}"
+                      @click="goTheme(item.id)">
+                        <span class="iconfont ifont" :class="[item.iconFontClass, {'current':currentThemeId===item.id}]"></span>
+                        <span>{{item.name}}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div class="function-sub">
-                    <a href="javascript:;" @click="logout">
-                    <i class="icon">&#xe674;</i>
-                    <span>退出登录</span>
-                    </a>
-                  </div>
-                </div>
+                </cube-scroll>
               </div>
-              <div class="sidebar-head" v-else>
-                <div class="user">
-                  <img src="http://p4w715494.bkt.clouddn.com/default.jpg" alt="">
-                  <span>请登录</span>
-                </div>
-                <div class="function">
-                  <div class="function-sub">
-                    <router-link to="">
-                      <i class="icon">&#xe626;</i>
-                      <span>我的参加</span>
-                    </router-link>
-                  </div>
-                  <div class="function-sub">
-                    <router-link to="user/login" @click="hideBar">
-                      <i class="icon">&#xe601;</i>
-                      <span>去登录</span>
-                    </router-link>
-                  </div>
-                </div>
-              </div>
+            <div class="sidebar-footer">
+              <div class="sidebar-footer-item"><span class="iconfont icon-shezhi"></span><span>设置</span></div>
+              <div class="sidebar-footer-item"><span class="iconfont icon-zhuti"></span><span>主题</span></div>
+              <div class="sidebar-footer-item"><span class="iconfont icon-yejianmoshi"></span><span>夜间</span></div>
             </div>
           </div>
         </transition>
@@ -53,7 +61,64 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import '../../assets/iconfont/iconfont.css'
 export default {
+  data() {
+    return {
+      themes: [
+        {
+          id: 0,
+          iconFontClass: 'icon-shouye',
+          name: '首页'
+        },
+        {
+          id: 1,
+          iconFontClass: 'icon-lishijilu',
+          name: '历史记录'
+        },
+        {
+          id: 2,
+          iconFontClass: 'icon-xiazaihuancun',
+          name: '离线缓存'
+        },
+        {
+          id: 3,
+          iconFontClass: 'icon-wodeshoucang',
+          name: '我的收藏'
+        },
+        {
+          id: 4,
+          iconFontClass: 'icon-wodeguanzhu',
+          name: '我的关注'
+        },
+        {
+          id: 5,
+          iconFontClass: 'icon-shaohouzaikan',
+          name: '稍后再看'
+        },
+        {
+          id: 6,
+          iconFontClass: 'icon-chuangzuozhongxin',
+          name: '创作中心'
+        },
+        {
+          id: 7,
+          iconFontClass: 'icon-mianliuliangfuwu',
+          name: '免流量服务'
+        },
+        {
+          id: 8,
+          iconFontClass: 'icon-wodedahuiyuan',
+          name: '我的大会员'
+        },
+        {
+          id: 9,
+          iconFontClass: 'icon-bangzhu',
+          name: '帮助'
+        }
+      ]
+    }
+  },
   computed: {
     ...mapGetters([
       'loginStatus',
@@ -61,6 +126,9 @@ export default {
     ]),
     sidebarShow() {
       return this.$store.state.common.leftNavStatus
+    },
+    currentThemeId() {
+      return this.$store.state.common.currentThemeId
     }
   },
   methods: {
@@ -73,6 +141,9 @@ export default {
       setTimeout(() => {
         this.$router.replace('/user')
       }, 500)
+    },
+    goTheme(id) {
+      this.$store.dispatch('changeCurrentThemeId', id)
     }
   }
 
@@ -80,49 +151,118 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 .sidebar
-  .sidebar-con
+  position: fixed
+  top: 0
+  bottom: 0
+  z-index: 50
+  .sidebar-wrapper
     position: fixed
     top: 0
-    width: 300px
-    height: 100%
+    bottom: 0
+    width: 280px
     z-index: 50
     background: #fff
     overflow: auto
-
     &.slide-enter-active, &.slide-leave-active
       transition all 0.5s
-
     &.slide-enter, &.slide-leave-active
       transform translate3d(-100%, 0, 0)
+    .sidebar-content
+      position: absolute
+      top: 0
+      bottom: 50px
+      overflow: hidden
+      .sidebar-head
+        padding: 32px 17px 0
+        color: #fff
+        background: #76D49B
 
-    .sidebar-head
-      padding: 17px 17px 0
-      color: #fff
-      background: #76D49B
+        .sidebar-user
+          display: flex
+          height: 60px
+          .sidebar-avatar
+            flex: 0 0 50px
+            height: 50px
+            img
+              width: 50px
+              height: 50px
+              border-radius: 50%
 
-      .user
-        img
-          width: 50px
-          height: 50px
-          border-radius: 50%
-          vertical-align: middle
-        span
-          padding-left: 8px
-          font-size: 11px
+          .sidebar-function
+            flex: 1
+            text-align: right
+            span
+              width: 50px
+              height: 50px
+              margin: 5px
+              padding: 5px
+              border: 1px solid #ffffff
+              border-radius: 50%
 
-      .function
-        display: flex
-        margin-top: 10px
-
-        .function-sub
-          flex: 1
-          padding-left: 15px
-          height: 50px
-          line-height: 50px
+        .sidebar-userInfo
+          text-align: left
+          padding-bottom: 30px
+          font-size: 16px
+          span
+            display: inline-block
+            vertical-align: top
+          .grade
+            width: 30px
+            height: 12px
+            line-height: 12px
+            border: 1px solid #ffffff
+            border-radius: 3px
+            font-size: 8px
+            text-align: center
           a
             display: block
             color: #fff
+            text-align: top
             font-size: 16px
+
+      .sidebar-list
+        width: 280px
+        margin-top: 20px
+        .sidebar-item
+          width: 100%
+          height: 50px
+          line-height: 50px
+          text-align: left
+          color: #000000
+          &.current
+            background-color: rgb(233, 233, 233)
+            color: #76D49B
+          span
+            display: inline-block
+            vertical-align: top
+            font-size: 16px
+            width: 100px
+            &.current
+              color: #76D49B
+          .ifont
+            width: 65px
+            font-size: 28px
+            color: #7E7E7E
+            text-align: center
+    .sidebar-footer
+      position: absolute
+      bottom: 0
+      width: 100%
+      display: flex
+      border-top: 1px solid #7E7E7E
+      .sidebar-footer-item
+        flex: 1
+        display: inline-block
+        height: 50px
+        line-height: 50px
+        span
+          font-size: 12px
+          color: #7E7E7E
+        .iconfont
+          border: 1px solid #7E7E7E
+          padding: 8px
+          margin-right: 5px
+          border-radius: 50%
 
   .sidebar-mask
     position: fixed

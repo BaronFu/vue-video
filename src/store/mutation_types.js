@@ -1,6 +1,7 @@
 // common 公共
 export const COM_NAV_STATUS = 'COM_NAV_STATUS'
 export const COM_LOADING_STATUS = 'COM_LOADING_STATUS'
+export const CHANGE_CURRENT_THEME_ID = 'CHANGE_CURRENT_THEME_ID'
 
 // user 用户
 export const SET_USER_TOKEN = 'SET_USER_TOKEN'
