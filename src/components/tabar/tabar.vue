@@ -3,26 +3,26 @@
         <div class="tab">
             <div class="tab-item">
                 <router-link to="/home" replace>
-                    <div class="tab-icon"><img src="./tab_home.png" alt=""></div>
-                    <div class="tab-text">首页</div>
+                    <span class="iconfont" :class="{'icon-shouyeweixuanzhong': !isHome, 'icon-shouyexuanzhong': isHome}"></span>
+                    <span class="tab-text">首页</span>
                 </router-link>
             </div>
             <div class="tab-item">
                 <router-link to="/category" replace>
-                    <div class="tab-icon"><img src="./tab_running.png" alt=""></div>
-                    <div class="tab-text">分类</div>
+                    <span class="iconfont" :class="{'icon-fenquweixuanzhong': !isCategory, 'icon-fenquxuanzhong': isCategory}"></span>
+                    <span class="tab-text">分类</span>
                 </router-link>
             </div>
             <div class="tab-item">
                 <router-link to="/dynamic" replace>
-                    <div class="tab-icon"><img src="./tab_travel.png" alt=""></div>
-                    <div class="tab-text">动态</div>
+                    <span class="iconfont" :class="{'icon-dongtaiweixuanzhong': !isDynamic, 'icon-dongtaixuanzhong': isDynamic}"></span>
+                    <span class="tab-text">动态</span>
                 </router-link>
             </div>
             <div class="tab-item">
                 <router-link to="/user" replace>
-                    <div class="tab-icon"><img src="./tab_user.png" alt=""></div>
-                    <div class="tab-text">我的</div>
+                    <span class="iconfont" :class="{'icon-wodeweixuanzhong': !isUser, 'icon-wodexuanzhong': isUser}"></span>
+                    <span class="tab-text">我的</span>
                 </router-link>
             </div>
         </div>
@@ -32,7 +32,10 @@
 export default {
   data () {
     return {
-
+      isHome: true,
+      isCategory: false,
+      isDynamic: false,
+      isUser: false
     }
   },
   computed: {
@@ -40,10 +43,45 @@ export default {
       let routeLength = this.$route.path.split('/').length
       return routeLength > 2 ? 0 : 1
     }
+  },
+  watch: {
+    '$route' (to, from) {
+      // 设置from Tab为未选中
+      switch (from.name) {
+        case 'home':
+          this.isHome = false
+          break
+        case 'category':
+          this.isCategory = false
+          break
+        case 'dynamic':
+          this.isDynamic = false
+          break
+        case 'user':
+          this.isUser = false
+          break
+      }
+      // 设置to Tab为选中
+      switch (to.name) {
+        case 'home':
+          this.isHome = true
+          break
+        case 'category':
+          this.isCategory = true
+          break
+        case 'dynamic':
+          this.isDynamic = true
+          break
+        case 'user':
+          this.isUser = true
+          break
+      }
+    }
   }
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
+@import "../../common/stylus/index.styl";
   .tabar
     height: 60px
     .tab
@@ -53,43 +91,30 @@ export default {
       left: 0
       display: flex
       width: 100%
-      height: 60px
-      line-height: 60px
+      height: 50px
       background: #fff
       box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2)
-
-      &:after
-        display: block
-        position: absolute
-        left: 0
-        top: 0
-        width: 100%
-        border-top: 1px solid rgba(7, 17, 27, 0.1)
-        content: ''
 
       .tab-item
         flex: 1
         text-align: center
-
+        padding-top: 10px
         a
           display: block
           font-size: 14px
-          color: rgb(77, 85, 93)
+          color: #7E7E7E
+          &.active
+            color: #76D49B
+            text-decoration: none
 
-        &.active
-          color: #76D49B
-          text-decoration: none
-
-        .tab-icon
-          width: 25px
-          height: 25px
-          margin: 0 auto
-
-          img
-            width: 100%
-
-        .tab-text
-          height: 40px
-          line-height: 40px
+          span
+            display: block
+            height: 20px
+            line-height: 20px
+            font-size: 12px
+          .iconfont
+            font-size: 22px
+          .tab-text
+            height: 20px
 
 </style>

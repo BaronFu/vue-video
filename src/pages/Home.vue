@@ -44,7 +44,9 @@ export default {
   created() {
   },
   mounted() {
-    this._fetchData()
+    if (this.$store.state.artwork.artworkList.length === 0) {
+      this._fetchData()
+    }
   },
   methods: {
     _fetchData() {
@@ -124,7 +126,7 @@ export default {
 .home
   position: absolute
   top: 50px
-  bottom: 60px
+  bottom: 50px
   width: 100%
   background-color: rgb(243, 243, 243)
 </style>

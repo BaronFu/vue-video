@@ -102,7 +102,7 @@ export default {
 .category
   position: absolute
   top: 50px
-  bottom: 60px
+  bottom: 50px
   width: 100%
   background-color: rgb(243, 243, 243)
 
