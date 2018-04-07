@@ -71,5 +71,13 @@ export default {
   // 获取评论
   getRatings(params) {
     return instance.get('/api/ratings', params)
+  },
+  // 收藏
+  collect(params) {
+    return instance.post('/api/collect', params)
+  },
+  // 取消收藏
+  unCollect(params) {
+    return instance.post('/api/uncollect', params)
   }
 }

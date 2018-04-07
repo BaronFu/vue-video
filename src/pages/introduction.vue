@@ -34,7 +34,7 @@
         </div>
         <div class="block">
           <i class="iconfont" :class="collectionClass" @click="collection"></i>
-          <div class="name">{{collectionNum}}</div>
+          <div class="name">{{artwork.collectNum}}</div>
         </div>
         <div class="block">
           <i class="iconfont icon-huangcun"></i>
@@ -67,7 +67,6 @@ export default {
   },
   data() {
     return {
-      isCollection: false,
       collectionNum: 103,
       message: '',
       isFlod: true,
@@ -96,7 +95,7 @@ export default {
       return this.artwork.isLike ? 'icon-zan' : 'icon-zan1'
     },
     collectionClass() {
-      return this.isCollection ? 'icon-shoucang' : 'icon-shoucang1'
+      return this.artwork.isCollect ? 'icon-shoucang' : 'icon-shoucang1'
     }
   },
   methods: {
@@ -154,12 +153,56 @@ export default {
       }
     },
     collection() {
-      if (!this.isCollection) {
-        this.isCollection = true
-        this.collectionNum++
+      if (!this.artwork.isCollect) {
+        // 收藏
+        api.collect({
+          artId: this.artwork._id
+        })
+          .then((res) => {
+            if (res.status === 200) {
+              this.artwork.isCollect = true
+              this.artwork.collectNum++
+              this.message = '成功收藏'
+              this.$refs.extendPopup.show()
+            }
+            console.log(res)
+          })
+          .catch((error) => {
+            if (error.response.status === 401) {
+              if (error.response.data.code === 10002) {
+                this.message = '亲您还没登录'
+                this.$refs.extendPopup.show()
+              } else if (error.response.data.code === 10003) {
+                this.message = '亲您的登录已过期'
+                this.$refs.extendPopup.show()
+              }
+            }
+          })
       } else {
-        this.isCollection = false
-        this.collectionNum--
+        // 取消收藏
+        api.unCollect({
+          artId: this.artwork._id
+        })
+          .then((res) => {
+            if (res.status === 200) {
+              this.artwork.isCollect = false
+              this.artwork.collectNum--
+              this.message = '取消收藏'
+              this.$refs.extendPopup.show()
+            }
+            console.log(res)
+          })
+          .catch((error) => {
+            if (error.response.status === 401) {
+              if (error.response.data.code === 10002) {
+                this.message = '亲您还没登录'
+                this.$refs.extendPopup.show()
+              } else if (error.response.data.code === 10003) {
+                this.message = '亲您的登录已过期'
+                this.$refs.extendPopup.show()
+              }
+            }
+          })
       }
     },
     share() {

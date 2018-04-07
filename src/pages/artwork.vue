@@ -1,18 +1,20 @@
 <template>
-  <div class="artwork-detail">
-    <div class="video-wrapper" v-html="video">
-      {{video}}
-    </div>
-    <div class="tab">
-      <div class="tab-item">
-        <router-link :to="{path: '/artwork/' + artworkDetail._id}" replace exact>简介</router-link>
+  <transition name="slide">
+    <div class="artwork-detail">
+      <div class="video-wrapper" v-html="video">
+        {{video}}
       </div>
-      <div class="tab-item">
-        <router-link :to="{path: '/artwork/' + artworkDetail._id + '/ratings'}" replace>评论</router-link>
+      <div class="tab">
+        <div class="tab-item">
+          <router-link :to="{path: '/artwork/' + artworkDetail._id}" replace exact>简介</router-link>
+        </div>
+        <div class="tab-item">
+          <router-link :to="{path: '/artwork/' + artworkDetail._id + '/ratings'}" replace>评论</router-link>
+        </div>
       </div>
+      <router-view :artwork="artworkDetail"></router-view>
     </div>
-    <router-view :artwork="artworkDetail"></router-view>
-  </div>
+  </transition>
 </template>
 <script>
 import api from '../api'
@@ -80,4 +82,8 @@ export default {
           color: rgb(77, 85, 93)
           &.active
             color: rgb(240, 20, 20)
+    &.slide-enter-active
+      transition all 0.5s
+    &.slide-enter
+      transform translate3d(100%, 0, 0)
 </style>
