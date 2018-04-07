@@ -69,7 +69,6 @@ export default {
     return {
       isCollection: false,
       collectionNum: 103,
-      collectionClass: 'icon-shoucang1',
       message: '',
       isFlod: true,
       recommend: [],
@@ -95,6 +94,9 @@ export default {
   computed: {
     likeClass() {
       return this.artwork.isLike ? 'icon-zan' : 'icon-zan1'
+    },
+    collectionClass() {
+      return this.isCollection ? 'icon-shoucang' : 'icon-shoucang1'
     }
   },
   methods: {
@@ -158,12 +160,6 @@ export default {
       } else {
         this.isCollection = false
         this.collectionNum--
-      }
-
-      if (this.isCollection) {
-        this.collectionClass = 'icon-shoucang'
-      } else {
-        this.collectionClass = 'icon-shoucang1'
       }
     },
     share() {

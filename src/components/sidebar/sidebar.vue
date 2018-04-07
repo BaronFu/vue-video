@@ -4,7 +4,6 @@
           <div class="sidebar-wrapper" v-show="sidebarShow">
               <div class="sidebar-content">
                 <cube-scroll>
-                  <div>
                     <div class="sidebar-head" v-if="loginStatus">
                       <div class="sidebar-user">
                         <div class="sidebar-avatar">
@@ -44,7 +43,6 @@
                         <span>{{item.name}}</span>
                       </div>
                     </div>
-                  </div>
                 </cube-scroll>
               </div>
             <div class="sidebar-footer">
@@ -249,7 +247,7 @@ export default {
       bottom: 0
       width: 100%
       display: flex
-      border-top: 1px solid #7E7E7E
+      border-top: 1px solid rgba(7, 17, 27, 0.1);
       .sidebar-footer-item
         flex: 1
         display: inline-block

@@ -16,6 +16,8 @@
     </div>
 </template>
 <script>
+import api from '../../api'
+import { Toast } from 'mint-ui'
 export default {
   data() {
     return {
@@ -23,7 +25,8 @@ export default {
       autofocus: false,
       autocomplete: true,
       clearable: true,
-      isShow: false
+      isShow: false,
+      message: ''
     }
   },
   methods: {
@@ -34,6 +37,50 @@ export default {
       this.isShow = false
     },
     comment() {
+      api.comment({
+        artId: this.$route.params.id,
+        content: this.value
+      })
+        .then((res) => {
+          if (res.status === 200) {
+            // 清除内容
+            this.value = ''
+            this.$emit('rating', res.data.data.rating)
+            let instance = Toast({
+              message: '评论成功',
+              position: 'middle',
+              duration: 5000
+            })
+            setTimeout(() => {
+              instance.close()
+            }, 2000)
+            console.log(res)
+          }
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            if (err.response.data.code === 10002) {
+              let instance = Toast({
+                message: '亲您还没登录',
+                position: 'middle',
+                duration: 5000
+              })
+              setTimeout(() => {
+                instance.close()
+              }, 2000)
+            } else if (err.response.data.code === 10003) {
+              let instance = Toast({
+                message: '亲您的登录已过期',
+                position: 'middle',
+                duration: 5000
+              })
+              setTimeout(() => {
+                instance.close()
+              }, 2000)
+            }
+          }
+        })
+      this.isShow = false
       console.log(this.value)
     }
   }

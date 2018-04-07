@@ -6,7 +6,7 @@ import store from '../store'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 // 创建一个axios实例
 const instance = axios.create({
-  baseURL: 'http://127.0.0.1:3000',
+  baseURL: 'http://192.168.0.102:3000',
   timeout: 3000
 })
 
@@ -63,5 +63,13 @@ export default {
   // 取消点赞
   cancelLike(params) {
     return instance.post('/api/cancel', params)
+  },
+  // 发表评论
+  comment(params) {
+    return instance.post('/api/comment', params)
+  },
+  // 获取评论
+  getRatings(params) {
+    return instance.get('/api/ratings', params)
   }
 }
