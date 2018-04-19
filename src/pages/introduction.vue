@@ -3,7 +3,7 @@
     <cube-scroll :options="options">
       <keep-alive>
         <div class="introduction-wrapper">
-          <userHeader :user="artwork.user"></userHeader>
+          <userHeader :user="artwork.user" v-if="artwork.user"></userHeader>
           <div class="fold-wrapper" @click="fold">
             <div class="title" :class="{ isflod: isFlod }">{{artwork.name}}</div>
             <span class="icon-fold iconfont icon-jiantou_down" v-if="isFlod"></span>
@@ -11,15 +11,19 @@
             <div class="record">
               <div class="record-item">
                 <span class="iconfont icon-bofangshu"></span>
-                <span class="num">{{artwork.pv}}</span>
+                <span class="num" v-if="artwork.pv">{{artwork.pv}}</span>
+                <span class="num" v-else>-</span>
               </div>
               <div class="record-item">
                 <span class="iconfont icon-yuanfucengpinglun"></span>
                 <span class="num">50</span>
               </div>
               <div class="record-item">
-                <span class="num">
+                <span class="num" v-if="artwork.created_at">
                   {{artwork.created_at | formatDate}}
+                </span>
+                <span class="num" v-else>
+                  -
                 </span>
               </div>
             </div>
@@ -30,11 +34,13 @@
       <div class="function border-1px">
         <div class="block">
           <i class="iconfont" :class="likeClass" @click="like"></i>
-          <div class="name">{{artwork.likeNum}}</div>
+          <div class="name" v-if="artwork.likeNum">{{artwork.likeNum}}</div>
+          <div class="name" v-else>点赞</div>
         </div>
         <div class="block">
           <i class="iconfont" :class="collectionClass" @click="collection"></i>
-          <div class="name">{{artwork.collectNum}}</div>
+          <div class="name" v-if="artwork.collectNum">{{artwork.collectNum}}</div>
+          <div class="name" v-else>收藏</div>
         </div>
         <div class="block">
           <i class="iconfont icon-huangcun"></i>
@@ -42,10 +48,11 @@
         </div>
         <div class="block">
           <i class="iconfont icon-fengxiang1" @click="share"></i>
-          <div class="name">23</div>
+          <div class="name" v-if="artwork.shareNum">23</div>
+          <div class="name" v-else>分享</div>
         </div>
       </div>
-      <recommend v-for="item in recommend" :artwork="item" :key="item.id"></recommend>
+      <recommend v-if="artwork._id" v-for="item in recommend" :artwork="item" :key="item.id"></recommend>
     </cube-scroll>
     <popup ref="extendPopup" :content="message"></popup>
     <share ref="share"></share>

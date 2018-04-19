@@ -10,6 +10,10 @@ import Register from '@/pages/register'
 import Artwork from '@/pages/artwork'
 import Introduction from '@/pages/introduction'
 import Ratings from '@/pages/ratings'
+import Space from '@/pages/Space'
+import Profile from '@/pages/Profile'
+import UploadImg from '@/pages/uploadImg'
+import Collection from '@/pages/collection'
 
 Vue.use(Router)
 
@@ -48,6 +52,7 @@ export default new Router({
     },
     {
       path: '/user/register',
+      name: 'register',
       component: Register
     },
     {
@@ -65,6 +70,26 @@ export default new Router({
           component: Ratings
         }
       ]
+    },
+    {
+      path: '/user/space',
+      name: 'space',
+      component: Space
+    },
+    {
+      path: '/user/profile',
+      name: 'profile',
+      component: Profile
+    },
+    {
+      path: '/user/profile/uploadImg',
+      name: 'uploadImg',
+      component: UploadImg
+    },
+    {
+      path: '/user/collection',
+      name: 'collection',
+      component: Collection
     }
   ],
   linkActiveClass: 'active'

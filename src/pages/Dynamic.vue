@@ -36,10 +36,11 @@ import { mapGetters } from 'vuex'
 import BScroll from 'better-scroll'
 import api from '../api'
 import { Toast } from 'mint-ui'
+import { Option } from '../config/option'
 export default {
   data () {
     return {
-      url: 'http://192.168.0.102:3000/api/upload',
+      url: Option.ImgServer + 'api/upload',
       imgs: [],
       titleInput: {
         type: 'text',

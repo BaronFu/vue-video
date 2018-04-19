@@ -22,23 +22,6 @@
             <p class="desc">90后大学生</p>
           </div>
         </div>
-        <div class="circle">
-          <div>
-            <div class="circle-n">
-              圈子
-            </div>
-            <div class="circle-p">
-              <ul>
-                <li><img src="../assets/images/user-img2.png" alt=""></li>
-                <li><img src="../assets/images/user-img3.png" alt=""></li>
-                <li><img src="../assets/images/user-img4.png" alt=""></li>
-              </ul>
-            </div>
-          </div>
-          <div class="circle-more">
-            <img src="../assets/images/more.png" alt="">
-          </div>
-        </div>
       </div>
       <div class="user-h-list ">
         <ul>

@@ -1,8 +1,11 @@
 <template>
   <transition name="slide">
     <div class="artwork-detail">
-      <div class="video-wrapper" v-html="video">
+      <div class="video-wrapper" v-html="video" v-if="artworkDetail._id">
         {{video}}
+      </div>
+       <div class="video-wrapper" style="text-align: center;line-height: 250px" v-else>
+        视频不见了哟
       </div>
       <div class="tab">
         <div class="tab-item">
@@ -18,6 +21,7 @@
 </template>
 <script>
 import api from '../api'
+import { Option } from '../config/option'
 export default {
   data() {
     return {
@@ -35,9 +39,10 @@ export default {
       }
     })
       .then(res => {
-        console.log(res.data.artwork)
-        this.artworkDetail = res.data.artwork
-        this.video = '<video width="100%" height="240" controls poster="http://192.168.0.102:3000/' + res.data.artwork.imageUrl + '" ><source src="http://192.168.0.102:3000/api/play?fn=' + res.data.artwork.videoUrl + '" type="video/mp4">您的浏览器不支持 video 标签。</video>'
+        if (res.status === 200) {
+          this.artworkDetail = res.data.data.artwork
+          this.video = '<video width="100%" height="240" controls poster="' + Option.ImgServer + res.data.data.artwork.imageUrl + '" ><source src="' + Option.PlayServer + res.data.data.artwork.videoUrl + '" type="video/mp4">您的浏览器不支持 video 标签。</video>'
+        }
       })
   },
   watch: {
@@ -48,9 +53,10 @@ export default {
         }
       })
         .then(res => {
-          console.log(res.data.artwork)
-          this.artworkDetail = res.data.artwork
-          this.video = '<video width="100%" height="240" controls poster="http://192.168.0.102:3000/' + res.data.artwork.imageUrl + '" ><source src="http://192.168.0.102:3000/api/play?fn=' + res.data.artwork.videoUrl + '" type="video/mp4">您的浏览器不支持 video 标签。</video>'
+          if (res.status === 200) {
+            this.artworkDetail = res.data.data.artwork
+            this.video = '<video width="100%" height="240" controls poster="' + Option.ImgServer + res.data.data.artwork.imageUrl + '" ><source src="' + Option.PlayServer + res.data.data.artwork.videoUrl + '" type="video/mp4">您的浏览器不支持 video 标签。</video>'
+          }
         })
     }
   }

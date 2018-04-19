@@ -8,10 +8,11 @@ import Cube from 'cube-ui'
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import VueLazyload from 'vue-lazyload'
+import { Option } from './config/option'
 
 Vue.config.productionTip = false
 
-Vue.use(VueSocketio, 'http://192.168.0.102:3000')
+Vue.use(VueSocketio, Option.ApiServer)
 Vue.use(Cube)
 Vue.use(MintUI)
 

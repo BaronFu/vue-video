@@ -44,9 +44,7 @@ export default {
   created() {
   },
   mounted() {
-    if (this.$store.state.artwork.artworkList.length === 0) {
-      this._fetchData()
-    }
+    this._fetchData()
   },
   methods: {
     _fetchData() {

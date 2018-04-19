@@ -1,12 +1,13 @@
 import axios from 'axios'
 import qs from 'qs'
 import store from '../store'
+import { Option } from '../config/option'
 
 // 设置全局axios默认值
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'
 // 创建一个axios实例
 const instance = axios.create({
-  baseURL: 'http://192.168.0.102:3000',
+  baseURL: Option.ApiServer,
   timeout: 3000
 })
 
@@ -17,7 +18,6 @@ instance.interceptors.request.use(
       config.data = qs.stringify(config.data)
     }
     if (store.state.user.loginStatus && store.state.user.userToken) {
-      console.log(store.state.user.userToken)
       config.headers.Authorization = `${store.state.user.userToken}`
     }
     return config
@@ -40,6 +40,14 @@ export default {
   Logout(params) {
     return instance.post('/api/logout', params)
   },
+  // 获取用户信息
+  getUserInfo(params) {
+    return instance.get('/api/getUserInfo', params)
+  },
+  // 获取上传图片Token
+  getUploadToken(params) {
+    return instance.get('/api/upload/token', params)
+  },
   // 获取验证码
   getCode(params) {
     return instance.post('/api/verifyCode', params)
@@ -55,6 +63,10 @@ export default {
   // 提交作品
   submitArtwork(params) {
     return instance.post('/api/artwork', params)
+  },
+  // 删除作品
+  deleteArtwork(params) {
+    return instance.post('/api/deleteArtwork', params)
   },
   // 点赞
   like(params) {
@@ -79,5 +91,13 @@ export default {
   // 取消收藏
   unCollect(params) {
     return instance.post('/api/uncollect', params)
+  },
+  // 获取收藏列表
+  getCollections(params) {
+    return instance.get('/api/collectList', params)
+  },
+  // 获取用户空间信息
+  getSpace(params) {
+    return instance.get('/api/space', params)
   }
 }

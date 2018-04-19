@@ -1,14 +1,14 @@
 <template>
-    <div class="recommend">
-        <router-link :to="{path: '/artwork/' + artwork._id}" replace>
-            <div class="recommend-wrapper border-1px">
-                <div class="recommend-left">
+    <div class="items">
+        <router-link :to="{path: '/artwork/' + artwork._id}">
+            <div class="items-wrapper border-1px">
+                <div class="items-left">
                     <img :src="imageUrl" width="100%">
                 </div>
-                <div class="recommend-right">
-                    <div class="recommend-title"><span>{{artwork.name}}</span></div>
-                    <div class="recommend-username"><i class="iconfont icon-UPzhu"></i><span>PeteFu</span></div>
-                    <div class="recommend-function">
+                <div class="items-right">
+                    <div class="items-title"><span>{{artwork.name}}</span></div>
+                    <div class="items-username"><i class="iconfont icon-UPzhu"></i><span>PeteFu</span></div>
+                    <div class="items-function">
                         <span><i class="iconfont icon-bofangshu"></i>{{artwork.pv}}</span>
                         <span><i class="iconfont icon-yuanfucengpinglun"></i>71</span>
                         <span style="text-align: right"><i class="iconfont icon-androidgengduo"></i></span>
@@ -27,6 +27,9 @@ export default {
       type: Object
     }
   },
+  created() {
+    console.log(this.artwork)
+  },
   computed: {
     imageUrl() {
       return Option.ImgServer + this.artwork.imageUrl
@@ -39,25 +42,25 @@ export default {
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import "../../common/stylus/index.styl";
-.recommend
+.items
   width: 100%
-  .recommend-wrapper
+  .items-wrapper
     display: flex
     height: 100px
     padding: 10px 0px
     border-1px(rgba(7, 17, 27, 0.1))
-    .recommend-left
+    .items-left
       flex: 0 0 35%
       padding-left: 10px
       padding: 0px 0px 10px 10px
       img
         height:100%
         border-radius: 5px
-    .recommend-right
+    .items-right
       flex: 1
       padding: 0px 10px
       text-align: left
-      .recommend-title
+      .items-title
         height: 40px
         line-height: 20px
         margin: 5px 0px
@@ -67,11 +70,11 @@ export default {
         display: -webkit-box
         -webkit-box-orient: vertical
         -webkit-line-clamp: 2
-      .recommend-username
+      .items-username
         height: 20px
         font-size: 12px
         color: #999999
-      .recommend-function
+      .items-function
         display: flex
         font-size: 12px
         color: #999999

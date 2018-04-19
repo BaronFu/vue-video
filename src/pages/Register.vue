@@ -42,6 +42,7 @@
 <script>
 import api from '../api'
 import BScroll from 'better-scroll'
+import { Toast } from 'mint-ui'
 export default {
   data() {
     return {
@@ -73,20 +74,24 @@ export default {
       api.getCode({mobile: this.username})
         .then(res => {
           if (res) {
-            this.waitTime = 60
-            this.sendAuthCode = false
-            this.authTimer = setInterval(() => {
-              this.waitTime--
-              if (this.waitTime <= 0) {
-                this.sendAuthCode = true
-                clearInterval(this.authTimer)
-                this.authTimer = null
-              }
-            }, 1000)
+            if (res.status === 200) {
+              this.getVerifiButton()
+            }
           }
         })
-        .catch(err => {
-          alert('短信发送失败' + err)
+        .catch(error => {
+          if (error.response.status === 404) {
+            if (error.response.data.code === 70001) {
+              let instance = Toast({
+                message: '手机号码已注册过',
+                position: 'middle',
+                duration: 5000
+              })
+              setTimeout(() => {
+                instance.close()
+              }, 2000)
+            }
+          }
         })
     },
     register () {
@@ -111,10 +116,17 @@ export default {
         .then(res => {
           console.log(res)
           if (res.status === 201) {
-            console.log(res.data.Info)
-            alert(res.data.Info)
+            let instance = Toast({
+              message: '注册成功',
+              position: 'middle',
+              duration: 5000
+            })
+            setTimeout(() => {
+              instance.close()
+              // 跳转到登录页面
+              this.$router.replace('/user/login')
+            }, 2000)
           }
-          this.$router.replace('/user/login')
         })
         .catch(error => {
           console.log(error)
@@ -123,12 +135,12 @@ export default {
     checkPhoneNum () {
       // mobile不能为空
       if (!this.username) {
-        alert('请输入手机号')
+        this._toastTip('请输入手机号')
         return false
       }
       // 验证手机格式是否正确
       if (!(/^1[34578]\d{9}$/).test(this.username)) {
-        alert('手机格式不正确，请重新输入')
+        this._toastTip('手机格式不正确，请重新输入')
         return false
       }
       return true
@@ -136,12 +148,12 @@ export default {
     checkPassword () {
       // password不能为空
       if (!this.password) {
-        alert('密码不能为空')
+        this._toastTip('密码不能为空')
         return false
       }
       // 密码校验
       if (!(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/).test(this.password)) {
-        alert('密码必须是8到16位数字与字母组合')
+        this._toastTip('密码必须是8到16位数字与字母组合')
         return false
       }
       return true
@@ -149,15 +161,38 @@ export default {
     checkCode () {
       // code不能为空
       if (!this.code) {
-        alert('验证码不能为空')
+        this._toastTip('验证码不能为空')
         return false
       }
       // code校验
       if (!(/^\d{6}$/).test(this.code)) {
-        alert('验证码必须是六位数')
+        this._toastTip('验证码必须是六位数')
         return false
       }
       return true
+    },
+    getVerifiButton () {
+      this.waitTime = 60
+      this.sendAuthCode = false
+      this.authTimer = setInterval(() => {
+        this.waitTime--
+        if (this.waitTime <= 0) {
+          this.sendAuthCode = true
+          clearInterval(this.authTimer)
+          this.authTimer = null
+        }
+      }, 1000)
+    },
+    // 弹框提示
+    _toastTip (message) {
+      let instance = Toast({
+        message: message,
+        position: 'middle',
+        duration: 5000
+      })
+      setTimeout(() => {
+        instance.close()
+      }, 1000)
     }
   }
 }

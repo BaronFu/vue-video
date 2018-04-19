@@ -30,6 +30,8 @@
 <script>
 import api from '../api'
 import BScroll from 'better-scroll'
+import { Toast } from 'mint-ui'
+import '../assets/iconfont/iconfont.css'
 export default {
   data () {
     return {
@@ -55,25 +57,54 @@ export default {
         .then(res => {
           console.log(res.data)
           let result = {
-            token: res.data.token,
-            userInfo: res.data.userInfo
+            token: res.data.data.token,
+            userInfo: res.data.data.userInfo
           }
-          if (res.data.success) {
+          if (res.status === 200) {
             this.$store.dispatch('setUserInfo', result)
-            alert('成功登陆')
+            let instance = Toast({
+              message: '登陆成功',
+              position: 'middle',
+              duration: 5000,
+              iconClass: 'iconfont icon-caozuochenggong'
+            })
             setTimeout(() => {
+              instance.close()
               this.$router.replace('/home')
-            }, 500)
+            }, 2000)
           }
         })
         .catch(error => {
-          console.log(error)
+          if (error.response.status === 404) {
+            if (error.response.data.code === 60001) {
+              let instance = Toast({
+                message: '密码错误',
+                position: 'middle',
+                duration: 5000,
+                iconClass: 'iconfont icon-caozuoshibai'
+              })
+              setTimeout(() => {
+                instance.close()
+              }, 2000)
+            } else if (error.response.data.code === 60000) {
+              let instance = Toast({
+                message: '用户不存在',
+                position: 'middle',
+                duration: 5000,
+                iconClass: 'iconfont icon-caozuoshibai'
+              })
+              setTimeout(() => {
+                instance.close()
+              }, 2000)
+            }
+          }
         })
     }
   }
 }
 </script>
 <style  lang="stylus" rel="stylesheet/stylus">
+@import "../common/stylus/mixin.styl"
 .login
   position: absolute
   top: 50px

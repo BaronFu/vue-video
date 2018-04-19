@@ -7,7 +7,9 @@
                     <div class="sidebar-head" v-if="loginStatus">
                       <div class="sidebar-user">
                         <div class="sidebar-avatar">
-                          <img :src="userInfo.avatar" alt="">
+                          <router-link to="user/space" @click="hideBar">
+                            <img :src="userInfo.avatar" alt="">
+                          </router-link>
                         </div>
                         <div class="sidebar-function">
                           <span><i class="iconfont icon-qianbao"></i></span>
@@ -17,9 +19,6 @@
                       <div class="sidebar-userInfo">
                           <span>{{userInfo.username}}</span>
                           <span class="grade">LV3</span>
-                          <a href="javascript:;" @click="logout">
-                            <span>退出登录</span>
-                          </a>
                       </div>
                     </div>
                     <div class="sidebar-head" v-else>
@@ -38,7 +37,7 @@
                     </div>
                     <div class="sidebar-list">
                       <div class="sidebar-item" v-for="item in themes" :key="item.id" :class="{'current':currentThemeId===item.id}"
-                      @click="goTheme(item.id)">
+                      @click="goTheme(item.id, item.path)">
                         <span class="iconfont ifont" :class="[item.iconFontClass, {'current':currentThemeId===item.id}]"></span>
                         <span>{{item.name}}</span>
                       </div>
@@ -67,52 +66,62 @@ export default {
         {
           id: 0,
           iconFontClass: 'icon-shouye',
-          name: '首页'
+          name: '首页',
+          path: '/home'
         },
         {
           id: 1,
           iconFontClass: 'icon-lishijilu',
-          name: '历史记录'
+          name: '历史记录',
+          path: '/home'
         },
         {
           id: 2,
           iconFontClass: 'icon-xiazaihuancun',
-          name: '离线缓存'
+          name: '离线缓存',
+          path: '/home'
         },
         {
           id: 3,
           iconFontClass: 'icon-wodeshoucang',
-          name: '我的收藏'
+          name: '我的收藏',
+          path: '/user/collection'
         },
         {
           id: 4,
           iconFontClass: 'icon-wodeguanzhu',
-          name: '我的关注'
+          name: '我的关注',
+          path: '/home'
         },
         {
           id: 5,
           iconFontClass: 'icon-shaohouzaikan',
-          name: '稍后再看'
+          name: '稍后再看',
+          path: '/home'
         },
         {
           id: 6,
           iconFontClass: 'icon-chuangzuozhongxin',
-          name: '创作中心'
+          name: '创作中心',
+          path: '/home'
         },
         {
           id: 7,
           iconFontClass: 'icon-mianliuliangfuwu',
-          name: '免流量服务'
+          name: '免流量服务',
+          path: '/home'
         },
         {
           id: 8,
           iconFontClass: 'icon-wodedahuiyuan',
-          name: '我的大会员'
+          name: '我的大会员',
+          path: '/home'
         },
         {
           id: 9,
           iconFontClass: 'icon-bangzhu',
-          name: '帮助'
+          name: '帮助',
+          path: '/home'
         }
       ]
     }
@@ -140,8 +149,10 @@ export default {
         this.$router.replace('/user')
       }, 500)
     },
-    goTheme(id) {
+    goTheme(id, path) {
       this.$store.dispatch('changeCurrentThemeId', id)
+      this.hideBar()
+      this.$router.push(path)
     }
   }
 

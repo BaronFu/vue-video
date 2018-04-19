@@ -32,10 +32,26 @@
 export default {
   data () {
     return {
-      isHome: true,
+      isHome: false,
       isCategory: false,
       isDynamic: false,
       isUser: false
+    }
+  },
+  created() {
+    switch (this.$route.name) {
+      case 'home':
+        this.isHome = false
+        break
+      case 'category':
+        this.isCategory = false
+        break
+      case 'dynamic':
+        this.isDynamic = false
+        break
+      case 'user':
+        this.isUser = false
+        break
     }
   },
   computed: {

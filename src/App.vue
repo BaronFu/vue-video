@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <v-header :title="title" :menu-display="menuDisplay" :back-display="backDisplay"></v-header>
+    <v-header :title="title" :menu-display="menuDisplay" :back-display="backDisplay" v-if="this.$store.state.common.headerStatus"></v-header>
     <div class="content">
         <router-view></router-view>
     </div>
-    <v-tabar></v-tabar>
+    <v-tabar v-if="this.$store.state.common.tabBarStatus"></v-tabar>
     <v-sidebar></v-sidebar>
   </div>
 </template>
@@ -21,6 +21,8 @@ export default {
   data() {
     return {}
   },
+  mounted() {
+  },
   components: {
     'v-tabar': tabar,
     'v-header': header,
@@ -29,6 +31,25 @@ export default {
   watch: {
     // 如果路由有变化，会再次执行该方法
     '$route': 'hideMenuSlide'
+    // '$route' (to, from) {
+    //   this.setNavState(false)
+    //   switch (to.name) {
+    //     case 'home':
+    //       this.$store.dispatch('setTabBarState', true)
+    //       break
+    //     case 'category':
+    //       this.$store.dispatch('setTabBarState', true)
+    //       break
+    //     case 'dynamic':
+    //       this.$store.dispatch('setTabBarState', true)
+    //       break
+    //     case 'user':
+    //       this.$store.dispatch('setTabBarState', true)
+    //       break
+    //     default:
+    //       this.$store.dispatch('setTabBarState', false)
+    //   }
+    // }
   },
   methods: {
     ...mapActions({ setNavState: 'setNavState' }),
@@ -65,6 +86,7 @@ export default {
 }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
+@import "./assets/iconfont/iconfont.css"
 @font-face {
   font-family: 'icon';  /* project id 172436 */
   src: url('//at.alicdn.com/t/font_w71lovnj7adobt9.eot');

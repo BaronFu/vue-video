@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="header-icon" v-show="menuDisplay" @click="showBar"><i class="icon">&#xe634;</i></div>
+    <div class="header-icon" v-show="menuDisplay" @click="showBar"><i class="iconfont icon-caidan"></i></div>
     <div class="header-icon" v-show="backDisplay" @click="goBack"><i class="icon">&#xe622;</i></div>
     <div class="header-cont" :class="{goBack:backDisplay}"><p>{{title}}</p></div>
   </div>
@@ -17,7 +17,7 @@ export default {
       this.$store.dispatch('setNavState', true)
     },
     goBack () {
-      window.history.back()
+      this.$router.go(-1)
     }
   }
 }
@@ -37,6 +37,9 @@ export default {
       flex: 1
       text-align: left
       padding-left: 10px
+      .iconfont
+        color: #ffffff
+        font-size: 32px
       >i
         line-height: 50px
 

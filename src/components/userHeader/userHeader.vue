@@ -1,6 +1,6 @@
 <template>
     <div class="userHeader">
-        <div class="userHeader-avatar"><img src="http://p4w715494.bkt.clouddn.com/avatar.jpg" width="30" height="30"></div>
+        <div class="userHeader-avatar"><img :src="user.avatar" width="30" height="30"></div>
         <span v-if="user">{{user.username}}</span>
         <div class="userHeader-subscribe" :class="{ative : isSubscribe}" @click="subscribe">
           <span v-if="isSubscribe" ><i></i>已关注</span>

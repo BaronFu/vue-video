@@ -17,13 +17,14 @@
   </div>
 </template>
 <script>
+import { Option } from '../../config/option'
 export default {
   props: {
     artwork: Object
   },
   computed: {
     imageUrl() {
-      return 'http://192.168.0.102:3000/' + this.artwork.imageUrl
+      return Option.ImgServer + this.artwork.imageUrl
     }
   },
   created() {
