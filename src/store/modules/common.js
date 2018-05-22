@@ -8,7 +8,8 @@ const state = {
   leftNavStatus: false,
   tabBarStatus: true,
   headerStatus: true,
-  currentThemeId: 0
+  currentThemeId: 0,
+  avatarImg: null
 }
 
 const actions = {
@@ -26,7 +27,9 @@ const actions = {
   }
 }
 
-const getters = {}
+const getters = {
+  avatarImg: state => state.avatarImg
+}
 
 const mutations = {
   [types.COM_NAV_STATUS](state, status) {
@@ -40,6 +43,9 @@ const mutations = {
   },
   [types.CHANGE_CURRENT_THEME_ID](state, id) {
     state.currentThemeId = id
+  },
+  [types.SET_AVATAR_IMG](state, img) {
+    state.avatarImg = img
   }
 }
 

@@ -19,7 +19,7 @@
         ></vueCropper>
       </div>
       <div class="btn">
-        <cube-button @click="finish"> Upload Button</cube-button>
+        <cube-button @click="finish">完成</cube-button>
       </div>
     </div>
 </template>
@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       option: {
-        img: 'http://p4w715494.bkt.clouddn.com/avatar.jpg',
+        img: this.$store.state.common.avatarImg,
         size: 1,
         full: false,
         outputType: 'png',
@@ -58,7 +58,7 @@ export default {
                 const formData = new FormData()
                 formData.append('file', data)
                 formData.append('token', res.data.data.token)
-                formData.append('key', res.data.data.key)
+                formData.append('key', res.data.data.key + '.webp')
 
                 axiosInstance({
                   method: 'POST',
@@ -66,7 +66,21 @@ export default {
                   data: formData
                 })
                   .then(res => {
-                    console.log(res)
+                    if (res.status === 200) {
+                      api.modifyUserInfo({
+                        params: {
+                          avatar: 'http://p4w715494.bkt.clouddn.com/' + res.data.key
+                        }
+                      })
+                        .then(res => {
+                          if (res.status === 200) {
+                            console.log(res.data.data)
+                            this.$store.state.common.avatarImg = res.data.data.avatar
+                            this.$store.state.user.userInfo.avatar = res.data.data.avatar
+                            this.$router.replace('/user/profile')
+                          }
+                        })
+                    }
                   })
               })
               this.$refs.cropper.getCropData((data) => {

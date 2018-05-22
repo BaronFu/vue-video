@@ -26,8 +26,8 @@ export default {
         pullUpLoad: {
           threshold: 0,
           txt: {
-            more: 'Load more',
-            noMore: 'No more data'
+            more: '加载更多',
+            noMore: '没有更多数据'
           }
         }
       }
@@ -41,19 +41,17 @@ export default {
       'artworkList'
     ])
   },
-  created() {
-  },
   mounted() {
     this._fetchData()
   },
   methods: {
     _fetchData() {
-      this.$store.dispatch('getArtworks', {
-        limit: 6,
-        operating: 'Loading',
-        lastTime: this.$store.state.artwork.lastTime,
-        nextTime: this.$store.state.artwork.nextTime
-      })
+      if (this.artworkList.length === 0) {
+        this.$store.dispatch('getArtworks', {
+          limit: 6,
+          operating: 'Init'
+        })
+      }
     },
     onPullingDown() {
       setTimeout(() => {
@@ -61,16 +59,13 @@ export default {
           params: {
             limit: 6,
             operating: 'Refresh',
-            lastTime: this.$store.state.artwork.lastTime,
-            nextTime: this.$store.state.artwork.nextTime
+            id: this.$store.state.artwork.artworkList[0]._id
           }
         })
           .then(res => {
             if (res.data.data.artworks.length !== 0) {
               // 如果有新数据
               this.$store.commit('UNSHIFT_ARTWORKS_DATA', res.data.data.artworks)
-              this.$store.commit('SET_LAST_TIME')
-              this.$store.commit('SET_NEXT_TIME')
             } else {
               // 如果没有新数据
               this.$refs.scroll.forceUpdate()
@@ -92,16 +87,13 @@ export default {
           params: {
             limit: 6,
             operating: 'Loading',
-            lastTime: this.$store.state.artwork.lastTime,
-            nextTime: this.$store.state.artwork.nextTime
+            id: this.$store.state.artwork.artworkList[this.$store.state.artwork.artworkList.length - 1]._id
           }
         })
           .then(res => {
             if (res.data.data.artworks.length !== 0) {
               // 如果有新数据
               this.$store.commit('CONCAT_ARTWORKS_DATA', res.data.data.artworks)
-              this.$store.commit('SET_LAST_TIME')
-              this.$store.commit('SET_NEXT_TIME')
             } else {
               // 如果没有新数据
               this.$refs.scroll.forceUpdate()

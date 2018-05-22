@@ -28,7 +28,7 @@
                 </div>
                 <div class="space-intro">
                     <div class="space-whatup">
-                        <p>bilibili</p>
+                        <p>{{user.signature}}</p>
                     </div>
                 </div>
             </div>
@@ -90,7 +90,6 @@ export default {
     api.getSpace({param: {}})
       .then(res => {
         if (res.status === 200) {
-          console.log(res.data.data)
           this.user = res.data.data.user
           this.collections = res.data.data.collections
           this.artworks = res.data.data.artworks
@@ -224,11 +223,14 @@ export default {
                     margin-top: 10px
                     .space-whatup
                         width: 290px
-                        width: 20px
+                        heigth: 20px
                         p
                             line-height: 20px
                             color: #999
                             text-align: left
+                            overflow: hidden
+                            text-overflow: ellipsis
+                            white-space: nowrap
         .space-tabs
             position: absolute
             display: flex

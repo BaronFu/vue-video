@@ -60,17 +60,17 @@ export default {
   data () {
     return {
       cellLists1: [
-        {link: '', iconUrl: '../../assets/images/user-cert.png', text: '学生认证', desc: '', badg: '', more: true},
-        {link: 'user/info', iconUrl: '../assets/images/user-detail.png', text: '我的详情', desc: '', badg: '', more: true},
-        {link: 'user/msg', iconUrl: '../assets/xyy-vue/images/user-message.png', text: '消息通知', desc: '', badg: '4', more: true}
+        {link: '/user', iconUrl: '../../assets/images/user-cert.png', text: '学生认证', desc: '', badg: '', more: true},
+        {link: '/user/info', iconUrl: '../assets/images/user-detail.png', text: '我的详情', desc: '', badg: '', more: true},
+        {link: '/user/msg', iconUrl: '../assets/xyy-vue/images/user-message.png', text: '消息通知', desc: '', badg: '4', more: true}
       ],
       cellLists2: [
-        {link: '', iconUrl: '../../assets/images/user-addfriend.png', text: '邀请好友', desc: '', badg: '', more: true},
-        {link: '', iconUrl: '../../assets/images/user-school.png', text: '选择高校', desc: '', badg: '', more: true}
+        {link: '/user', iconUrl: '../../assets/images/user-addfriend.png', text: '邀请好友', desc: '', badg: '', more: true},
+        {link: '/user', iconUrl: '../../assets/images/user-school.png', text: '选择高校', desc: '', badg: '', more: true}
       ],
       cellLists3: [
         {link: 'user/set', iconUrl: '../../assets/images/user-set.png', text: '设置', desc: '', badg: '', more: true},
-        {link: '', iconUrl: '../../assets/images/user-call.png', text: '联系客服', desc: '18679168426', badg: '', more: true}
+        {link: '/user', iconUrl: '../../assets/images/user-call.png', text: '联系客服', desc: '18679168426', badg: '', more: true}
       ]
     }
   },

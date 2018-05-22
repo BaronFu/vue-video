@@ -24,8 +24,8 @@ const actions = {
   // 退出登录
   setSignOut({ commit }) {
     localStorage.removeItem('userToken')
-    localStorage.removeItem('loginStatus')
     localStorage.removeItem('userInfo')
+    localStorage.setItem('loginStatus', false)
     commit(types.SET_USER_TOKEN, '')
     commit(types.SET_LOGIN_STATUS, false)
     commit(types.SET_USER_INFO, {})

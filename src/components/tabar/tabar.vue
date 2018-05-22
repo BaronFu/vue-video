@@ -41,16 +41,16 @@ export default {
   created() {
     switch (this.$route.name) {
       case 'home':
-        this.isHome = false
+        this.isHome = true
         break
       case 'category':
-        this.isCategory = false
+        this.isCategory = true
         break
       case 'dynamic':
-        this.isDynamic = false
+        this.isDynamic = true
         break
       case 'user':
-        this.isUser = false
+        this.isUser = true
         break
     }
   },

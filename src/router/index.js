@@ -14,6 +14,7 @@ import Space from '@/pages/Space'
 import Profile from '@/pages/Profile'
 import UploadImg from '@/pages/uploadImg'
 import Collection from '@/pages/collection'
+import Create from '@/pages/create'
 
 Vue.use(Router)
 
@@ -56,6 +57,18 @@ export default new Router({
       component: Register
     },
     {
+      path: '/user/set',
+      name: 'set'
+    },
+    {
+      path: '/user/info',
+      name: 'info'
+    },
+    {
+      path: '/user/msg',
+      name: 'msg'
+    },
+    {
       path: '/artwork/:id',
       name: 'artwork',
       component: Artwork,
@@ -80,6 +93,11 @@ export default new Router({
       path: '/user/profile',
       name: 'profile',
       component: Profile
+    },
+    {
+      path: '/user/create',
+      name: 'create',
+      component: Create
     },
     {
       path: '/user/profile/uploadImg',

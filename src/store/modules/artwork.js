@@ -2,7 +2,7 @@ import * as types from '../mutation_types'
 import api from '../../api'
 
 const state = {
-  artworkList: JSON.parse(localStorage.getItem('artworkList')) || [],
+  artworkList: [],
   lastTime: JSON.parse(localStorage.getItem('lastTime')) || new Date(),
   nextTime: JSON.parse(localStorage.getItem('nextTime')) || new Date()
 }
@@ -17,8 +17,6 @@ const actions = {
         console.log(res)
         if (res.data.code === 2000) {
           commit(types.CONCAT_ARTWORKS_DATA, res.data.data.artworks)
-          commit(types.SET_LAST_TIME)
-          commit(types.SET_NEXT_TIME)
         } else if (res.data.code === 1000) {
           alert(res.data.message)
         } else if (res.data.code === 1001) {
@@ -27,21 +25,6 @@ const actions = {
           alert(res.data.message)
         }
       })
-  },
-  // get Artworks Detail
-  getArtworkDetail({ commit }, payload) {
-    api.getArtworkDetail({
-      params: {
-        id: payload
-      }
-    })
-      .then(res => {
-        commit(types.SET_ARTWORK_DETAIL, res.data)
-      })
-  },
-  // refresh data
-  resetData ({ commit }) {
-    commit(types.RESET_ARTWORKS_DATA)
   }
 }
 
@@ -72,13 +55,11 @@ const mutations = {
     for (var i = 0; i < payload.length; i++) {
       state.artworkList.unshift(payload[i])
     }
-    localStorage.setItem('artworkList', JSON.stringify(state.artworkList))
   },
   [types.CONCAT_ARTWORKS_DATA](state, payload) {
     for (var i = 0; i < payload.length; i++) {
       state.artworkList.push(payload[i])
     }
-    localStorage.setItem('artworkList', JSON.stringify(state.artworkList))
   },
   [types.SET_LAST_TIME](state) {
     state.lastTime = state.artworkList[0].created_at

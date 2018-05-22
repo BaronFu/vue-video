@@ -1,11 +1,10 @@
 <template>
   <transition name="slide">
     <div class="artwork-detail">
-      <div class="video-wrapper" v-html="video" v-if="artworkDetail._id">
-        {{video}}
+      <div class="video-wrapper" width="240px" v-html="video" v-if="artworkDetail._id">
       </div>
-       <div class="video-wrapper" style="text-align: center;line-height: 250px" v-else>
-        视频不见了哟
+      <div class="video-wrapper" v-else>
+        <div style="height: 200px; line-height:200px;">视频不见了哟!</div>
       </div>
       <div class="tab">
         <div class="tab-item">
@@ -30,9 +29,7 @@ export default {
       artworkDetail: {}
     }
   },
-  computed: {
-  },
-  created() {
+  mounted() {
     api.getArtworkDetail({
       params: {
         id: this.$route.params.id
@@ -58,6 +55,15 @@ export default {
             this.video = '<video width="100%" height="240" controls poster="' + Option.ImgServer + res.data.data.artwork.imageUrl + '" ><source src="' + Option.PlayServer + res.data.data.artwork.videoUrl + '" type="video/mp4">您的浏览器不支持 video 标签。</video>'
           }
         })
+    }
+  },
+  methods: {
+    // listen event
+    onPlayerPlay(player) {
+      // console.log('player play!', player)
+    },
+    onPlayerPause(player) {
+      // console.log('player pause!', player)
     }
   }
 }

@@ -37,7 +37,7 @@
                     </div>
                     <div class="sidebar-list">
                       <div class="sidebar-item" v-for="item in themes" :key="item.id" :class="{'current':currentThemeId===item.id}"
-                      @click="goTheme(item.id, item.path)">
+                      @click="goTheme(item.id, item.path)" v-if="item.show">
                         <span class="iconfont ifont" :class="[item.iconFontClass, {'current':currentThemeId===item.id}]"></span>
                         <span>{{item.name}}</span>
                       </div>
@@ -67,61 +67,57 @@ export default {
           id: 0,
           iconFontClass: 'icon-shouye',
           name: '首页',
-          path: '/home'
+          path: '/home',
+          show: true
         },
         {
           id: 1,
           iconFontClass: 'icon-lishijilu',
           name: '历史记录',
-          path: '/home'
+          path: '/home',
+          show: true
         },
         {
           id: 2,
           iconFontClass: 'icon-xiazaihuancun',
           name: '离线缓存',
-          path: '/home'
+          path: '/home',
+          show: true
         },
         {
           id: 3,
           iconFontClass: 'icon-wodeshoucang',
           name: '我的收藏',
-          path: '/user/collection'
+          path: '/user/collection',
+          show: true
         },
         {
           id: 4,
           iconFontClass: 'icon-wodeguanzhu',
           name: '我的关注',
-          path: '/home'
+          path: '/home',
+          show: true
         },
         {
           id: 5,
           iconFontClass: 'icon-shaohouzaikan',
           name: '稍后再看',
-          path: '/home'
+          path: '/home',
+          show: true
         },
         {
           id: 6,
           iconFontClass: 'icon-chuangzuozhongxin',
           name: '创作中心',
-          path: '/home'
-        },
-        {
-          id: 7,
-          iconFontClass: 'icon-mianliuliangfuwu',
-          name: '免流量服务',
-          path: '/home'
-        },
-        {
-          id: 8,
-          iconFontClass: 'icon-wodedahuiyuan',
-          name: '我的大会员',
-          path: '/home'
+          path: '/user/create',
+          show: true
         },
         {
           id: 9,
           iconFontClass: 'icon-bangzhu',
           name: '帮助',
-          path: '/home'
+          path: '/home',
+          show: true
         }
       ]
     }
@@ -138,6 +134,9 @@ export default {
       return this.$store.state.common.currentThemeId
     }
   },
+  created () {
+    console.log(this.loginStatus)
+  },
   methods: {
     hideBar() {
       this.$store.dispatch('setNavState', false)
@@ -152,7 +151,27 @@ export default {
     goTheme(id, path) {
       this.$store.dispatch('changeCurrentThemeId', id)
       this.hideBar()
-      this.$router.push(path)
+      if (this.loginStatus) {
+        this.$router.push(path)
+      } else {
+        switch (id) {
+          case 1:
+            this.$router.push('/user/login')
+            break
+          case 3:
+            this.$router.push('/user/login')
+            break
+          case 4:
+            this.$router.push('/user/login')
+            break
+          case 5:
+            this.$router.push('/user/login')
+            break
+          case 6:
+            this.$router.push('/user/login')
+            break
+        }
+      }
     }
   }
 

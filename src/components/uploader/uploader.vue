@@ -165,6 +165,7 @@ export default {
           color: #fff
           cursor: pointer
           line-height 12px
+          border-radius: 50%
           transform: rotate(45deg)
           background: rgba(0, 0, 0, 0.5)
         .file-loading

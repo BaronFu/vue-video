@@ -8,7 +8,7 @@
       <div class="cell-r">
         <span class="text" v-show="desc" style="vertical-align: sub;">{{desc}}</span>
         <span class="badg" v-show="badg" style="vertical-align: middle;">{{badg}}</span>
-        <span class="avatar" v-how="avatar"><img :src="avatar" alt=""></span>
+        <span class="avatar" v-show="avatar"><img :src="avatar" alt=""></span>
         <img v-show="more" src="./more.png" class="more" alt="">
       </div>
     </router-link>

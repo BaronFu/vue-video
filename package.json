@@ -23,6 +23,7 @@
     "vue-cropper": "^0.2.9",
     "vue-router": "^3.0.1",
     "vue-socket.io": "^2.1.1-b",
+    "vue-video-player": "^5.0.2",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

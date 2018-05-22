@@ -16,7 +16,7 @@
               </div>
               <div class="record-item">
                 <span class="iconfont icon-yuanfucengpinglun"></span>
-                <span class="num">50</span>
+                <span class="num">{{artwork.commentNum}}</span>
               </div>
               <div class="record-item">
                 <span class="num" v-if="artwork.created_at">
@@ -223,7 +223,7 @@ export default {
       }
     },
     _recomList() {
-      let arr = JSON.parse(localStorage.getItem('artworkList'))
+      let arr = this.$store.state.artwork.artworkList
       let ret = arr.findIndex((value, index, arr) => {
         return value._id === this.$route.params.id
       })
