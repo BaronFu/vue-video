@@ -1,6 +1,6 @@
 # vue-video
 
-> School Video Sharing
+> 视频点播WebAPP
 
 ## Build Setup
 
