@@ -1,6 +1,7 @@
 # Vue-Video
 
 > 一个基于vue全家桶开发的视频点播WebAPP
+
 > 项目github地址:https://github.com/BaronFu/vue-video
 
 ## Build Setup
