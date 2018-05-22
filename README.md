@@ -1,4 +1,4 @@
-# svs-vue
+# vue-video
 
 > School Video Sharing
 
