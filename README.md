@@ -4,11 +4,11 @@
 
 > 项目github地址:https://github.com/BaronFu/vue-video
 
-##Technology Stack
+## Technology Stack
 
 > vue2+vue-router+vuex+axios+better-scroll+mint-ui+cube-ui+stylus
 
-##Demo Preview URL
+## Demo Preview URL
 
 >
 
