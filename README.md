@@ -4,7 +4,28 @@
 
 > 项目github地址:https://github.com/BaronFu/vue-video
 
-## feature
+##Technology Stack
+
+> vue2+vue-router+vuex+axios+better-scroll+mint-ui+cube-ui+stylus
+
+##Demo Preview URL
+
+>
+
+## Feature
+
+- [x] 首页
+- [x] 图片懒加载
+- [x] 侧边栏过渡动画
+- [x] 首页下拉刷新
+- [x] 首页上拉加载
+- [x] 视频详情页
+- [x] 收藏视频
+- [x] 点赞视频
+- [x] 评论页面
+- [x] 视频播放
+- [x] 收藏视频列表
+- [x] 个人详情页
 
 ## Build Setup
 
